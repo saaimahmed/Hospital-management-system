@@ -16,4 +16,4 @@ use App\Http\Controllers\DepartmentController;
 */
 
 Route::get('/',[dashboardController::class,'home'])->name('home');
-Route::get('/departments/index',[DepartmentController::class,'index'])->name('departments.index');
+
