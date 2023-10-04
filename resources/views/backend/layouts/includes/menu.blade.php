@@ -14,38 +14,6 @@
                 </span>
             </div>
 
-            <!--begin:Services Menu link-->
-            <div class="menu-item menu-accordion">
-                <a href="">
-                    <span class="menu-link">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-files-tablet fs-2">
-                            <span class="path1"></span><span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">Services</span>
-                </span>
-                </a>
-            </div>
-            <!--begin:Expertise Menu link-->
-            <div class="menu-item menu-accordion">
-                <a href="">
-                    <span class="menu-link">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-files-tablet fs-2">
-                            <span class="path1"></span><span class="path2"></span>
-                        </i>
-                    </span>
-                    <span class="menu-title">User</span>
-                </span>
-                </a>
-            </div>
-
-            <div class="menu-item pt-5">
-                <div class="menu-content">
-                    <span class="menu-heading fw-bold text-uppercase fs-7">Pages</span>
-                </div>
-            </div>
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <span class="menu-link">
                     <span class="menu-icon">
@@ -72,278 +40,33 @@
                     </div>
                 </div>
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                <!--begin:Menu link--><span class="menu-link"><span class="menu-icon"><i
-                            class="ki-duotone ki-element-plus fs-2"><span class="path1"></span><span
-                                class="path2"></span><span class="path3"></span><span class="path4"></span><span
-                                class="path5"></span></i></span><span class="menu-title">Account</span><span
-                        class="menu-arrow"></span></span><!--end:Menu link--><!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion"><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Overview</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Settings</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Security</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Activity</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Billing</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Statements</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Referrals</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="bullet bullet-dot"></span><span
-                                class="menu-title">API Keys</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Logs</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--></div><!--end:Menu sub--></div><!--end:Menu item-->
-            <!--begin:Menu item-->
-            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                <!--begin:Menu link--><span class="menu-link"><span class="menu-icon"><i
-                            class="ki-duotone ki-user fs-2"><span class="path1"></span><span
-                                class="path2"></span></i></span><span class="menu-title">Authentication</span><span
-                        class="menu-arrow"></span></span><!--end:Menu link--><!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion"><!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link--><span class="menu-link"><span class="menu-bullet"><span
-                                    class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Corporate Layout</span><span
-                                class="menu-arrow"></span></span><!--end:Menu link--><!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion menu-active-bg"><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span
-                                        class="menu-title">Sign-in</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span
-                                        class="menu-title">Sign-up</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span
-                                        class="menu-title">Two-Factor</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span class="menu-title">Reset Password</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span class="menu-title">New Password</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--></div><!--end:Menu sub-->
-                    </div><!--end:Menu item--><!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link--><span class="menu-link"><span class="menu-bullet"><span
-                                    class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Overlay Layout</span><span
-                                class="menu-arrow"></span></span><!--end:Menu link--><!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion menu-active-bg"><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span
-                                        class="menu-title">Sign-in</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span
-                                        class="menu-title">Sign-up</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span
-                                        class="menu-title">Two-Factor</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span class="menu-title">Reset Password</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span class="menu-title">New Password</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--></div><!--end:Menu sub-->
-                    </div><!--end:Menu item--><!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link--><span class="menu-link"><span class="menu-bullet"><span
-                                    class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Creative Layout</span><span
-                                class="menu-arrow"></span></span><!--end:Menu link--><!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion menu-active-bg"><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span
-                                        class="menu-title">Sign-in</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span
-                                        class="menu-title">Sign-up</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span
-                                        class="menu-title">Two-Factor</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span class="menu-title">Reset Password</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span class="menu-title">New Password</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--></div><!--end:Menu sub-->
-                    </div><!--end:Menu item--><!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link--><span class="menu-link"><span class="menu-bullet"><span
-                                    class="bullet bullet-dot"></span></span><span class="menu-title">Fancy Layout</span><span
-                                class="menu-arrow"></span></span><!--end:Menu link--><!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion menu-active-bg"><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span
-                                        class="menu-title">Sign-in</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link menu-bullet" href=""><span
-                                        class="bullet bullet-dot"></span><span class="menu-title">Sign-up</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span
-                                        class="menu-title">Two-Factor</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span class="menu-title">Reset Password</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span class="menu-title">New Password</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--></div><!--end:Menu sub-->
-                    </div><!--end:Menu item--><!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link--><span class="menu-link"><span class="menu-bullet"><span
-                                    class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Email Templates</span><span
-                                class="menu-arrow"></span></span><!--end:Menu link--><!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion menu-active-bg"><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span class="menu-title">Welcome Message</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span class="menu-title">Reset Password</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span class="menu-title">Subscription Confirmed</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span class="menu-title">Credit Card Declined</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span
-                                        class="menu-title">Promo 1</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span
-                                        class="menu-title">Promo 2</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--><!--begin:Menu item-->
-                            <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                        class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span
-                                        class="menu-title">Promo 3</span></a>
-                                <!--end:Menu link--></div><!--end:Menu item--></div><!--end:Menu sub-->
-                    </div><!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Multi-steps Sign-up</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Welcome Message</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Verify Email</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Coming Soon</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Password Confirmation</span></a><!--end:Menu link-->
-                    </div><!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Account Deactivation</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Error 404</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Error 500</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--></div><!--end:Menu sub--></div><!--end:Menu item-->
-            <!--begin:Menu item-->
-            <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-                 data-kt-menu-placement="right-start"
-                 class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention">
-                <!--begin:Menu link--><span class="menu-link"><span class="menu-icon"><i
-                            class="ki-duotone ki-file fs-2"><span class="path1"></span><span
-                                class="path2"></span></i></span><span class="menu-title">Corporate</span><span
-                        class="menu-arrow"></span></span><!--end:Menu link--><!--begin:Menu sub-->
-                <div
-                    class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-2 py-4 w-200px mh-75 overflow-auto">
-                    <!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""> class="menu-bullet"><span
-                                class="bullet bullet-dot"></span><span
-                                class="menu-title">About</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Our Team</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Contact Us</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Licenses</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--><!--begin:Menu item-->
-                    <div class="menu-item"><!--begin:Menu link--><a class="menu-link" href=""><span
-                                class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                class="menu-title">Sitemap</span></a><!--end:Menu link--></div>
-                    <!--end:Menu item--></div><!--end:Menu sub--></div><!--end:Menu item-->
-            <!--begin:Menu item-->
+               <span class="menu-link"><span class="menu-icon"><i class="ki-duotone ki-geolocation-home fs-2x"><span class="path1"></span><span class="path2"></span></i></span>
+                   <span class="menu-title">Locations</span><span class="menu-arrow"></span></span>
+                <div class="menu-sub menu-sub-accordion">
+                    <div class="menu-item">
+                        <a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Unions</span></a>
+                    </div>
 
+                    <div class="menu-item">
+                        <a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Upazilas</span>
+                        </a>
+                    </div>
 
+                    <div class="menu-item">
+                        <a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Districts</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Divisions</span>
+                        </a>
+                    </div>
 
-
+                </div>
+           </div>
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <span class="menu-link">
                     <span class="menu-icon">
