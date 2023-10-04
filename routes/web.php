@@ -15,6 +15,7 @@ use App\Http\Controllers\DepartmentController;
 |
 */
 //
+
 Route::controller(DepartmentController::class)->prefix('departments')->group(function (){
     Route::get('/index','index')->name('departments.index');
 });
