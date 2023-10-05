@@ -1,11 +1,20 @@
+<script src="{{ asset('/') }}assets/js/jquery-3.7.0.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="{{ asset('/') }}assets/plugins/global/plugins.bundle.js"></script>
+<script src="{{ asset('/') }}assets/js/select2.min.js"></script>
 <script src="{{ asset('/') }}assets/js/scripts.bundle.js"></script>
 
 <script src="{{ asset('/') }}assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 <script src="{{ asset('/') }}assets/plugins/custom/datatables/datatables.bundle.js"></script>
 
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
 <script>
     function logout(){
         document.querySelector('#logout_form').submit()
@@ -56,3 +65,4 @@
         })
     </script>
 @endif
+
