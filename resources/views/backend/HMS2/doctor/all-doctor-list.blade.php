@@ -41,8 +41,19 @@
         <div id="kt_app_content_container" class="app-container  container-xxl ">
 
             <div class="card card-flush">
+
+                <div class="pt-5 mx-10">
+                    <ul class="nav-item d-flex gap-8 justify-content-end align-items-center">
+                        <li class="nav-link"> <a href="" class=""><i class="fa fa-trash fs-2x text-danger"></i></a></li>
+                        <li class="nav-link"> <a href="" class=""><i class="fa fa-file-excel fs-2x text-success"></i></a></li>
+                        <li class="nav-link"> <a href="" class=""><i class="fa fa-print fs-2x text-warning"></i></a></li>
+                    </ul>
+
+                </div>
+
                 <div class="card-header align-items-center py-5 gap-2 gap-md-5">
                     <!--begin::Card title-->
+
                     <div class="card-title">
                         <!--begin::Search-->
                         <div class="d-flex align-items-center position-relative my-1">
@@ -92,7 +103,7 @@
                                         <input class="form-check-input" type="checkbox" value="1"/>
                                     </div>
                                 </td>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $doctor->custom_id}}</td>
                                 <td><img src="{{ $doctor->image ? asset( $doctor->image  ) : asset('assets/media/avatars/avater.jpg') }}" alt="" style="width: 60px; height: 60px;" class="image-thumbnail rounded-circle object-fit-cover"></td>
                                 <td>{{ $doctor->dr_name }}</td>
                                 <td>{{ $doctor->dr_designation }}</td>
@@ -275,23 +286,23 @@
 
     <script>
 
-        // function deleteItem(id){
-        //     Swal.fire({
-        //         title: 'Are you sure?',
-        //         text: "You won't be able to revert this!",
-        //         icon: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonColor: '#3085d6',
-        //         cancelButtonColor: '#d33',
-        //         confirmButtonText: 'Yes, delete it!'
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             let form = document.querySelector('#delete_form');
-        //             form.action = '/departments/destroy/' + id;
-        //             form.submit();
-        //         }
-        //     })
-        // }
+        function deleteItem(id){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let form = document.querySelector('#delete_form');
+                    form.action = 'destroy/' + id;
+                    form.submit();
+                }
+            })
+        }
     </script>
 
     <script>

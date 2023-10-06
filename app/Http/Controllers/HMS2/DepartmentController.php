@@ -80,4 +80,6 @@ class DepartmentController extends Controller
         $department->delete();
         return redirect()->back()->with('success', 'Department delete successfully.');
     }
+
+
 }

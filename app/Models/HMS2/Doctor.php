@@ -4,10 +4,12 @@ namespace App\Models\HMS2;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\softDeletes;
 
 class Doctor extends Model
 {
     use HasFactory;
+    use softDeletes;
     protected $fillable = [
 
         'dr_name','dr_department','dr_designation','dr_email','dr_phone','image',
