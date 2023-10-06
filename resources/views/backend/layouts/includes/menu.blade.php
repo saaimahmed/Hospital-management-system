@@ -77,78 +77,102 @@
 
                     </div>
                 </div>
-
-                {{--                Locations--}}
+                {{--                Patients--}}
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                  <span class="menu-link"><span class="menu-icon"><i class="ki-duotone ki-geolocation-home fs-2x">
-                              <span class="path1"></span><span class="path2"></span>
-                          </i></span><span class="menu-title">Locations</span><span class="menu-arrow"></span>
+               <span class="menu-link"><span class="menu-icon">
+                       <i class="ki-duotone ki-profile-circle fs-2x">
+                           <span class="path1"></span>
+                         <span class="path2"></span>
+                         <span class="path3"></span>
+                        </i>
+                                        </span>
+                   <span class="menu-title">Patients</span><span class="menu-arrow"></span></span>
+                    <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('patients.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                                <span class="menu-title">All Patient List</span></a>
+                        </div>
+
+{{--                        <div class="menu-item">--}}
+{{--                            <a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>--}}
+{{--                                <span class="menu-title">Patient Trash</span>--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+
+                        {{--                        <div class="menu-item">--}}
+                        {{--                            <a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>--}}
+                        {{--                                <span class="menu-title">Districts</span>--}}
+                        {{--                            </a>--}}
+                        {{--                        </div>--}}
+                        {{--                        <div class="menu-item">--}}
+                        {{--                            <a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>--}}
+                        {{--                                <span class="menu-title">Divisions</span>--}}
+                        {{--                            </a>--}}
+                        {{--                        </div>--}}
+
+                    </div>
+                </div>
+
+                {{--                Appoinment--}}
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                  <span class="menu-link"><span class="menu-icon">
+
+                          <i class="ki-duotone ki-calendar-add fs-2x">
+                             <span class="path1"></span>
+                             <span class="path2"></span>
+                             <span class="path3"></span>
+                             <span class="path4"></span>
+                             <span class="path5"></span>
+                             <span class="path6"></span>
+                        </i>
+
+                      </span><span class="menu-title">Appointments</span><span class="menu-arrow"></span>
                   </span>
                     <div class="menu-sub menu-sub-accordion">
                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                     <span class="menu-link"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                         <span class="menu-title">Unions</span><span class="menu-arrow"></span>
+                     <span class="menu-link"><i class="ki-duotone ki-calendar-8 fs-2x me-2">
+                         <span class="path1"></span>
+                         <span class="path2"></span>
+                         <span class="path3"></span>
+                         <span class="path4"></span>
+                         <span class="path5"></span>
+                         <span class="path6"></span>
+                        </i>
+                  <span class="menu-title">Schedule</span><span class="menu-arrow"></span>
                      </span>
                             <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                <div class="menu-item"><a class="menu-link" href="{{ route('unions.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                                        <span class="menu-title">All Union List</span></a>
+                                <div class="menu-item"><a class="menu-link" href="{{ route('schedules.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                                        <span class="menu-title">All Schedule List</span></a>
                                 </div>
                                 <div class="menu-item"><a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                                        <span class="menu-title">Union Trash</span></a>
+                                        <span class="menu-title">Schedule Trash</span></a>
                                 </div>
 
                             </div>
                         </div>
 
-
                     </div>
+
                     <div class="menu-sub menu-sub-accordion">
                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                     <span class="menu-link"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                         <span class="menu-title">Upazilas</span><span class="menu-arrow"></span>
+
+                     <span class="menu-link">
+                                <i class="ki-duotone ki-calendar-tick fs-2x me-2 ">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                            <span class="path3"></span>
+                                            <span class="path4"></span>
+                                            <span class="path5"></span>
+                                            <span class="path6"></span>
+                                        </i>
+                         <span class="menu-title">Appointments</span><span class="menu-arrow"></span>
                      </span>
                             <div class="menu-sub menu-sub-accordion menu-active-bg">
                                 <div class="menu-item"><a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                                        <span class="menu-title">All Upazilas List</span></a>
+                                        <span class="menu-title">All Appointments List</span></a>
                                 </div>
                                 <div class="menu-item"><a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                                        <span class="menu-title">Upazilas Trash</span></a>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div class="menu-sub menu-sub-accordion">
-                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                     <span class="menu-link"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                         <span class="menu-title">Districts</span><span class="menu-arrow"></span>
-                     </span>
-                            <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                <div class="menu-item"><a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                                        <span class="menu-title">All Districts List</span></a>
-                                </div>
-                                <div class="menu-item"><a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                                        <span class="menu-title">Districts Trash</span></a>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div class="menu-sub menu-sub-accordion">
-                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                     <span class="menu-link"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                         <span class="menu-title">Divisions</span><span class="menu-arrow"></span>
-                     </span>
-                            <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                <div class="menu-item"><a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                                        <span class="menu-title">All Divisions List</span></a>
-                                </div>
-                                <div class="menu-item"><a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-                                        <span class="menu-title">Divisions Trash</span></a>
+                                        <span class="menu-title">Appointment Trash</span></a>
                                 </div>
 
                             </div>

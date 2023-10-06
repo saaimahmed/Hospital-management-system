@@ -128,9 +128,6 @@ class DoctorController extends Controller
         ], 200);
     }
 
-
-
-
     public function status($id){
 
         $doctor = Doctor::find(decrypt($id));
@@ -159,6 +156,13 @@ class DoctorController extends Controller
         return redirect()->back()->with('success', 'Doctor Restore successfully.');
 
     }
+    public function allRestore(Request $request) {
+        $Ids = $request->ids;
+
+        Doctor::whereIn('id',  $Ids)->restore();
+
+        return response()->json(['message' => 'Selected data Restore successfully']);
+    }
 
     public function permanentDelete($id)
     {
@@ -167,4 +171,22 @@ class DoctorController extends Controller
         return redirect()->back()->with('success', 'Permanently Doctor delete successfully.');
 
     }
+
+    public function selectPermanentDelete(Request $request){
+
+        $Ids = $request->ids;
+        Doctor::whereIn('id',  $Ids)->forceDelete();
+        return redirect()->back()->with('success', 'Select Permanently Doctor delete successfully.');
+    }
+
+    public function selectedDelete(Request $request) {
+
+        $Ids = $request->ids;
+
+        Doctor::whereIn('id',  $Ids)->delete();
+
+        return response()->json(['message' => 'Selected data deleted successfully']);
+    }
+
+
 }

@@ -44,7 +44,15 @@
 
                 <div class="pt-5 mx-10">
                     <ul class="nav-item d-flex gap-8 justify-content-end align-items-center">
-                        <li class="nav-link"> <a href="" class=""><i class="fa fa-trash fs-2x text-danger"></i></a></li>
+                        <li class="nav-link">
+                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="" class="py-5" href="" id="select-data-restore" data-bs-original-title="Selected Restore" aria-label="Delete Selected"><i class="fas fa-undo fs-2x text-success"></i></a>
+                        </li>
+                        <li class="nav-link">
+
+{{--                            <a href="" class=""><i class="fa fa-trash fs-2x text-danger"></i></a>--}}
+
+                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="" class="delete-btn-group py-5" id="select-force-delete" href="" data-bs-original-title="Delete Selected" aria-label="Delete Selected"><i class="fa fa-trash fs-2x text-danger"></i></a>
+                        </li>
                         <li class="nav-link"> <a href="" class=""><i class="fa fa-file-excel fs-2x text-success"></i></a></li>
                         <li class="nav-link"> <a href="" class=""><i class="fa fa-print fs-2x text-warning"></i></a></li>
                     </ul>
@@ -75,8 +83,8 @@
                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                             <th class="w-10px pe-2">
                                 <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                    <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                           data-kt-check-target="#kt_ecommerce_category_table .form-check-input" value="1"/>
+                                    <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_category_table .form-check-input" value="1" id="select-all-checkbox" />
+                                    <label class="form-check-label" for="select-all-checkbox"></label>
                                 </div>
                             </th>
                             <th class="min-w-50px ps-5">id</th>
@@ -91,13 +99,13 @@
                         <tbody class="fw-semibold text-gray-600">
 
                         @foreach($doctors as $doctor)
-                            <tr>
+                            <tr id="doctor_ids{{ $doctor->id }}">
                                 <td>
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="1"/>
+                                        <input class="form-check-input" name="ids" class="checkbox-ids" type="checkbox" value="{{ $doctor->id }}"/>
                                     </div>
                                 </td>
-                                <td>{{ $doctor->custom_id}}</td>
+                                <td>{{ $doctor->id}}</td>
                                 <td><img src="{{ $doctor->image ? asset( $doctor->image  ) : asset('assets/media/avatars/avater.jpg') }}" alt="" style="width: 60px; height: 60px;" class="image-thumbnail rounded-circle object-fit-cover"></td>
                                 <td>{{ $doctor->dr_name }}</td>
                                 <td>{{ $doctor->dr_designation }}</td>
@@ -175,13 +183,98 @@
         }
     </script>
 
-    <script>
-        {{--        Add Client review--}}
 
 
+    {{-- Restore Selected field--}}
+        <script>
+        $(document).ready(function() {
+            $('#select-all-checkbox').on('click', function() {
+                $('.checkbox-ids').prop('checked', $(this).prop('checked'));
+            });
 
+            $("#select-data-restore").on('click', function (e) {
+                e.preventDefault();
+
+                let all_ids = [];
+                $('input:checkbox[name=ids]:checked').each(function () {
+                    all_ids.push($(this).val());
+                });
+
+                // Add a SweetAlert confirmation dialog
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'success',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Restore it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // User clicked "Yes, delete it!" in the confirmation dialog
+                        $.ajax({
+                            url: "{{ route('doctors.all-restore') }}",
+                            type: "get",
+                            data: {
+                                ids: all_ids,
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function (response) {
+                                $.each(all_ids, function (key, val) {
+                                    $('#doctor_ids' + val).remove();
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+         </script>
+    {{--Forece Delete  Selected field--}}
+        <script>
+        $(document).ready(function() {
+            $('#select-all-checkbox').on('click', function() {
+                $('.checkbox-ids').prop('checked', $(this).prop('checked'));
+            });
+
+            $("#select-force-delete").on('click', function (e) {
+                e.preventDefault();
+
+                let all_ids = [];
+                $('input:checkbox[name=ids]:checked').each(function () {
+                    all_ids.push($(this).val());
+                });
+
+                // Add a SweetAlert confirmation dialog
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Permanent Delete  it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // User clicked "Yes, delete it!" in the confirmation dialog
+                        $.ajax({
+                            url: "{{ route('doctors.select-permanent-delete') }}",
+                            type: "post",
+                            data: {
+                                ids: all_ids,
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function (response) {
+                                $.each(all_ids, function (key, val) {
+                                    $('#doctor_ids' + val).remove();
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
     </script>
-
 
     <!--begin::Vendors Javascript(used for this page only)-->
     {{--    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--}}

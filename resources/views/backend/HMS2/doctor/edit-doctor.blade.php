@@ -40,15 +40,16 @@
     <div id="kt_app_content" class="app-content  flex-column-fluid ">
         <div id="kt_app_content_container" class="app-container  container-xxl ">
 
-            <form class="form" method="post" action="{{ route('doctors.update', encrypt($doctor->id)) }}"  id="edit_doctor_form" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="modal-header" id="kt_modal_new_address_header">
-                    <h3 class="text-center mx-auto">Edit Doctor</h3>
+            <div class="card card-body shadow-lg">
+                <form class="form" method="post" action="{{ route('doctors.update', encrypt($doctor->id)) }}"  id="edit_doctor_form" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-header" id="kt_modal_new_address_header">
+                        <h3 class="text-center mx-auto">Edit Doctor</h3>
 
-                </div>
-                <!--begin::Modal body-->
-                <div class="modal-body py-10 px-lg-17">
+                    </div>
+                    <!--begin::Modal body-->
+                    <div class="modal-body py-10 px-lg-17">
 
                         <!--begin::Input group Department Name-->
                         <div class="row mb-5">
@@ -132,20 +133,22 @@
 
                         </div>
 
-        </div>
+                    </div>
 
-                <!--begin::Modal footer-->
-                <div class="modal-footer flex-center">
-                    <button type="submit" id="updateBtn" class="btn btn-primary d-flex justify-content-center align-content-center">
+                    <!--begin::Modal footer-->
+                    <div class="modal-footer flex-center">
+                        <button type="submit" id="updateBtn" class="btn btn-primary d-flex justify-content-center align-content-center">
                         <span class="indicator-label pt-2 text-white">Update
                         </span>
-                        <span class="indicator-progress">
+                            <span class="indicator-progress">
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                             </span>
 
-                    </button>
-                </div>
-            </form>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 @endsection
@@ -163,8 +166,6 @@
                 $(".text-danger").text('');
                 const formData = new FormData($(this)[0]);
 
-                $("#updateBtn .indicator-label").text("updating...");
-                $("#updateBtn .indicator-progress").show();
 
                 $.ajax({
                     url: $(this).attr('action'),
@@ -175,6 +176,10 @@
                     contentType: false,
 
                     success: function (response) {
+
+                        $("#updateBtn .indicator-label").text("updating...");
+                        $("#updateBtn .indicator-progress").show();
+
                         if (response.status === 'success') {
                             Swal.fire({
                                 icon: 'success',
