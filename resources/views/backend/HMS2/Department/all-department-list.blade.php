@@ -243,7 +243,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     let form = document.querySelector('#delete_form');
-                    form.action = '/departments/destroy/' + id;
+                    form.action = 'destroy/' + id;
                     form.submit();
                 }
             })

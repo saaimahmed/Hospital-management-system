@@ -59,7 +59,7 @@
                         </div>
 
                         <div class="menu-item">
-                            <a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <a class="menu-link" href="{{ route('doctors.soft-delete') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
                                 <span class="menu-title">Doctor Trash</span>
                             </a>
                         </div>

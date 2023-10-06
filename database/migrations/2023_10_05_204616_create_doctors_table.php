@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('dr_experience')->nullable();
             $table->text('dr_qualification')->nullable();
             $table->tinyInteger('status')->default(1)->comment('1 => Active , 0 => Deactivated');
-            $table->timestamp('deleted_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

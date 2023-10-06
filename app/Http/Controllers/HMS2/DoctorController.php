@@ -12,11 +12,31 @@ class DoctorController extends Controller
 {
     public function index()
     {
-        return view('backend.HMS2.doctor.all-doctor-list',[
-            'departments' => Department::where('status', 1)->where('department_type', 'doctor')->get(['id', 'department_name']),
-            'doctors' => Doctor::latest()->get(['id','dr_name','dr_designation','dr_department','dr_phone','status','image']),
-        ]);
+        $doctors = Doctor::latest()->get(['id', 'dr_name', 'dr_designation', 'dr_department', 'dr_phone', 'status', 'image']);
+
+        if ($doctors->isEmpty()) {
+            return view('backend.HMS2.doctor.all-doctor-list', [
+                'departments' => Department::where('status', 1)->where('department_type', 'doctor')->get(['id', 'department_name']),
+                'doctors' => $doctors,
+            ]);
+        } else {
+            $doctors = $doctors->reverse();
+
+            $lastId = $doctors->first()->id;
+            $customId = $lastId;
+
+            $formattedDoctors = $doctors->map(function ($doctor) use (&$customId) {
+                $doctor->custom_id = 'DR-' . $customId--;
+                return $doctor;
+            });
+
+            return view('backend.HMS2.doctor.all-doctor-list', [
+                'departments' => Department::where('status', 1)->where('department_type', 'doctor')->get(['id', 'department_name']),
+                'doctors' => $formattedDoctors,
+            ]);
+        }
     }
+
     public function store(Request $request){
 
         $request->validate([
@@ -117,6 +137,34 @@ class DoctorController extends Controller
         $doctor->status = $doctor->status == 1 ? 0 : 1 ;
         $doctor->save();
         return redirect()->back()->with('success', 'Status changed successfully.');
+
+    }
+
+    public function destroy($id){
+
+        $doctor = Doctor::find($id);
+        $doctor->delete();
+        return redirect()->back()->with('success', 'Doctor delete successfully.');
+    }
+
+    public function softDelete(){
+        return view('backend.HMS2.doctor.all-doctor-trash',[
+            'doctors' => Doctor::onlyTrashed()->latest()->get(['id', 'dr_name', 'dr_designation', 'dr_department', 'dr_phone', 'status', 'image']),
+        ]);
+    }
+
+    public function restore($id){
+        $doctor = Doctor::withTrashed()->find(decrypt($id));
+        $doctor->restore();
+        return redirect()->back()->with('success', 'Doctor Restore successfully.');
+
+    }
+
+    public function permanentDelete($id)
+    {
+        $doctor = Doctor::onlyTrashed()->find($id);
+        $doctor->forceDelete();
+        return redirect()->back()->with('success', 'Permanently Doctor delete successfully.');
 
     }
 }

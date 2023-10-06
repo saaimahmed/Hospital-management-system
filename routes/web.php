@@ -34,6 +34,11 @@ Route::controller(DoctorController::class)->prefix('doctors')->group(function ()
     Route::get('/edit/{id}','edit')->name('doctors.edit');
     Route::put('/update/{id}','update')->name('doctors.update');
     Route::get('/status/{id}','status')->name('doctors.status');
+    Route::delete('/destroy/{id}','destroy')->name('doctors.destroy');
+    //soft delete
+    Route::get('/soft-deletes','softDelete')->name('doctors.soft-delete');
+    Route::get('/restore/{id}','restore')->name('doctors.restore');
+    Route::delete('/permanent-delete/{id}','permanentDelete')->name('doctors.permanent-delete');
 });
 
 
