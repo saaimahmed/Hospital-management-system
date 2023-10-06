@@ -40,78 +40,82 @@
     <div id="kt_app_content" class="app-content  flex-column-fluid ">
         <div id="kt_app_content_container" class="app-container  container-xxl ">
 
-            <form class=""  action="{{ route('departments.update', encrypt($department->id)) }}" method="post" id="edit_department_form" enctype="multipart/form-data">
-                @csrf
-                @method('put')
-                <div class="" id="">
-                    <h3 class="text-center mx-auto">Edit  Department</h3>
+            <div class="card card-body shadow-lg">
+                <form class=""  action="{{ route('departments.update', encrypt($department->id)) }}" method="post" id="edit_department_form" enctype="multipart/form-data">
+                    @csrf
+                    @method('put')
+                    <div class="" id="">
+                        <h3 class="text-center mx-auto">Edit  Department</h3>
 
-                </div>
-                <!--begin::Modal body-->
-                <div class=" py-10 px-lg-17">
-                    <!--begin::Scroll-->
-                    <div
-                        class="scroll-y me-n7 pe-7" id=""
-                        data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
-                        data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_address_header"
-                        data-kt-scroll-wrappers="#" data-kt-scroll-offset="300px">
+                    </div>
+                    <!--begin::Modal body-->
+                    <div class=" py-10 px-lg-17">
+                        <!--begin::Scroll-->
+                        <div
+                            class="scroll-y me-n7 pe-7" id=""
+                            data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
+                            data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_address_header"
+                            data-kt-scroll-wrappers="#" data-kt-scroll-offset="300px">
 
-                        <!--begin::Input group Department Name-->
-                        <div class="row mb-5">
-                            <div class="col-8 fv-row">
-                                <label for="department_name" class="required fs-5 fw-semibold mb-2">Department name</label>
-                                <input id="department_name" value="{{ $department->department_name }}" type="text" class="form-control " placeholder="Department name" name="department_name" autofocus/>
-                                <div class="text-danger my-1" id="department_name_error"></div>
-                            </div>
-
-                        {{--                                @error('department_name')--}}
-                        {{--                                    <div class="text-danger mt-1">{{ $message }}</div>--}}
-                        {{--                                @enderror--}}
-                        <!--begin::Input group Department Type-->
-                            <div class="col-4 fv-row">
-                                <label for="department_type" class="required fs-5 fw-semibold mb-2">Department Type</label>
-                                <select name="department_type" id="" class="form-control selected">
-                                    <option value="doctor" {{ $department->department_type == 'Doctor' ? 'selected' : '' }} >Doctor</option>
-                                </select>
-                                <div class="text-danger my-1" id="department_type_error"></div>
-                            </div>
-
-                            {{--                                @error('department_type')--}}
-                            {{--                                <div class="text-danger mt-1">{{ $message }}</div>--}}
-                            {{--                                @enderror--}}
-                        </div>
-                        <!--begin::Input group Department Description-->
-                        <div class="row mb-5">
-                            <div class="col-12 fv-row">
-                                <label for="department_description" class=" fs-5 fw-semibold mb-2">Department Description</label>
-                                <textarea name="department_description" id="" class="form-control" cols="30" rows="2" placeholder="Department description">{{ $department->department_description }}</textarea>
-                            </div>
-                        </div>
-
-                        <div class="row mb-5">
-                            <div class="form-group">
-                                <label for="department_type" class="fs-5 fw-semibold mb-2">Upload Department Picture</label>
-                                <div class="image-upload form-control">
-                                    <input type="file" name="image" id="">
+                            <!--begin::Input group Department Name-->
+                            <div class="row mb-5">
+                                <div class="col-8 fv-row">
+                                    <label for="department_name" class="required fs-5 fw-semibold mb-2">Department name</label>
+                                    <input id="department_name" value="{{ $department->department_name }}" type="text" class="form-control " placeholder="Department name" name="department_name" autofocus/>
+                                    <div class="text-danger my-1" id="department_name_error"></div>
                                 </div>
-                                <img src="{{ $department->image ? asset( $department->image  ) : asset('assets/media/avatars/avater.jpg') }}" class="py-3" alt="Department Image" style="height: 100px; width: 100px">
 
+                            {{--                                @error('department_name')--}}
+                            {{--                                    <div class="text-danger mt-1">{{ $message }}</div>--}}
+                            {{--                                @enderror--}}
+                            <!--begin::Input group Department Type-->
+                                <div class="col-4 fv-row">
+                                    <label for="department_type" class="required fs-5 fw-semibold mb-2">Department Type</label>
+                                    <select name="department_type" id="" class="form-control selected">
+                                        <option value="doctor" {{ $department->department_type == 'Doctor' ? 'selected' : '' }} >Doctor</option>
+                                    </select>
+                                    <div class="text-danger my-1" id="department_type_error"></div>
+                                </div>
+
+                                {{--                                @error('department_type')--}}
+                                {{--                                <div class="text-danger mt-1">{{ $message }}</div>--}}
+                                {{--                                @enderror--}}
+                            </div>
+                            <!--begin::Input group Department Description-->
+                            <div class="row mb-5">
+                                <div class="col-12 fv-row">
+                                    <label for="department_description" class=" fs-5 fw-semibold mb-2">Department Description</label>
+                                    <textarea name="department_description" id="" class="form-control" cols="30" rows="2" placeholder="Department description">{{ $department->department_description }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="row mb-5">
+                                <div class="form-group">
+                                    <label for="department_type" class="fs-5 fw-semibold mb-2">Upload Department Picture</label>
+                                    <div class="image-upload form-control">
+                                        <input type="file" name="image" id="">
+                                    </div>
+                                    <img src="{{ $department->image ? asset( $department->image  ) : asset('assets/media/avatars/avater.jpg') }}" class="py-3" alt="Department Image" style="height: 100px; width: 100px">
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!--begin::Modal footer-->
-                <div class="modal-footer flex-center">
-                    {{--                    <input type="submit" class="btn-success" value="Update">--}}
-                    <button type="submit" id="updateBtn" class="btn btn-primary d-flex justify-content-center align-content-center">
-                        <span class="indicator-label">Update</span>
-                        <span class="indicator-progress">
+                    <!--begin::Modal footer-->
+                    <div class="modal-footer flex-center">
+                        {{--                    <input type="submit" class="btn-success" value="Update">--}}
+                        <button type="submit" id="updateBtn" class="btn btn-primary d-flex justify-content-center align-content-center">
+                            <span class="indicator-label">Update</span>
+                            <span class="indicator-progress">
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                             </span>
-                    </button>
-                </div>
-            </form>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+
         </div>
     </div>
 @endsection

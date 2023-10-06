@@ -1,10 +1,10 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Doctor')
+@section('title', 'Patient')
 
 @section('style')
     <link href="{{ asset('/') }}assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
-{{--    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />--}}
+    {{--    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />--}}
 @endsection
 
 @section('body')
@@ -13,7 +13,7 @@
         <div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
                 <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-3">
-                  Doctor List
+                    Patient List
                 </h1>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <li class="breadcrumb-item text-muted">
@@ -23,13 +23,13 @@
                         <span class="bullet bg-gray-400 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        Doctor
+                        Patient
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-400 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                      Doctor List
+                        Patient List
                     </li>
                 </ul>
             </div>
@@ -45,7 +45,7 @@
                 <div class="pt-5 mx-10">
                     <ul class="nav-item d-flex gap-8 justify-content-end align-items-center">
                         <li class="nav-link">
-{{--                            <a href="#" class="" id="selected-Data-Delete"><i class="fa fa-trash fs-2x text-danger"></i></a>--}}
+                            {{--                            <a href="#" class="" id="selected-Data-Delete"><i class="fa fa-trash fs-2x text-danger"></i></a>--}}
                             <a data-bs-toggle="tooltip" data-bs-placement="top" title="" id="selected-Data-Delete" class="delete-btn-group py-5" href="" data-bs-original-title="Delete Selected" aria-label="Delete Selected"><i class="fa fa-trash fs-2x text-danger"></i></a>
 
                         </li>
@@ -66,13 +66,13 @@
                             </i>
                             <input type="text" data-kt-ecommerce-category-filter="search"
                                    class="form-control form-control-solid w-250px ps-12"
-                                   placeholder="Search Doctor"/>
+                                   placeholder="Search Patient"/>
                         </div>
                     </div>
                     <div class="card-toolbar">
                         <a class="btn btn-primary" id="add_service_button" data-bs-toggle="modal"
                            data-bs-target="#kt_modal_new_address">
-                            Add Doctor
+                            Add Patient
                         </a>
                     </div>
                 </div>
@@ -81,47 +81,41 @@
                 <div class="card-body pt-0">
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_category_table">
                         <thead>
-                        <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                        <tr class="text-black fw-bold fs-7 text-uppercase gs-0 text-center">
                             <th class="w-10px pe-2">
-{{--                                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">--}}
-{{--                                    <input class="form-check-input" type="checkbox" data-kt-check="true"--}}
-{{--                                           data-kt-check-target="#kt_ecommerce_category_table .form-check-input" value="1"/>--}}
-{{--                                </div>--}}
+
                                 <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                     <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_category_table .form-check-input" value="1" id="select-all-checkbox" />
                                     <label class="form-check-label" for="select-all-checkbox"></label>
                                 </div>
                             </th>
-                            <th class="min-w-50px ps-5">id</th>
-                            <th class="min-w-100px ps-5">Doctor image</th>
-                            <th class="min-w-100px ps-5">Doctor Name</th>
-                            <th class="min-w-100px">Designation</th>
-                            <th class="min-w-100px">Department</th>
-                            <th class="min-w-50px">phone</th>
-                            <th class="min-w-50px">Status</th>
+                            <th class="min-w-50px ps-5">Patient id</th>
+                            <th class="min-w-100px ps-5">Patient Name</th>
+                            <th class="min-w-100px">Mobile</th>
+                            <th class="min-w-50px">Sex/Gender</th>
+                            <th class="min-w-90px">Blood Group</th>
+                            <th class="min-w-50px">Age</th>
+                            <th class="min-w-250px">Address</th>
                             <th class="text-end min-w-70px pe-5">Actions</th>
                         </tr>
                         </thead>
-                        <tbody class="fw-semibold text-gray-600">
+                        <tbody class="fw-semibold text-black text-center">
 
-                        @foreach($doctors as $doctor)
-                            <tr id="doctor_ids{{ $doctor->id }}">
+                        @foreach($patients as $patient)
+                            <tr id="patient_ids{{ $patient->id }}">
                                 <td>
                                     <div class="form-check form-check-sm form-check-custom form-check-solid ">
-                                        <input class="form-check-input" name="ids" class="checkbox-ids" type="checkbox" value="{{ $doctor->id }}"/>
+                                        <input class="form-check-input" name="ids" class="checkbox-ids" type="checkbox" value="{{ $patient->id }}"/>
                                     </div>
                                 </td>
-                                <td>{{ $doctor->custom_id}}</td>
-                                <td><img src="{{ $doctor->image ? asset( $doctor->image  ) : asset('assets/media/avatars/avater.jpg') }}" alt="" style="width: 60px; height: 60px;" class="image-thumbnail rounded-circle object-fit-cover"></td>
-                                <td>{{ $doctor->dr_name }}</td>
-                                <td>{{ $doctor->dr_designation }}</td>
-                                <td>{{ $doctor->dr_department }}</td>
-                                <td>{{ $doctor->dr_phone }}</td>
-                                <td>
-                                    <a href="{{ route('doctors.status', encrypt($doctor->id)) }}" id="status-change">
-                                        <div class="badge {{ $doctor->status === 1 ? 'badge-light-success' : 'badge-light-danger' }}">{{  $doctor->status === 1 ? 'Active' : 'Deactivated'}}</div>
-                                    </a>
-                                </td>
+                                <td>{{ $patient->custom_id}}</td>
+                                <td>{{ $patient->patient_name }}</td>
+                                <td>{{ $patient->patient_mobile }}</td>
+                                <td>{{ $patient->patient_gender  }}</td>
+                                <td>{{ $patient->patient_blood_group }}</td>
+                                <td>{{ $patient->patient_age }} {{ $patient->unit }}</td>
+                                <td>{{ $patient->patient_address }}</td>
+
                                 <td class="text-end">
                                     <a href="#" class="btn btn-sm btn-light btn-active-light-primary btn-flex btn-center"
                                        data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -130,19 +124,14 @@
                                     </a>
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
                                         <div  class="menu-item px-3 mb-1">
-                                            <a href="{{ route('doctors.edit', encrypt($doctor->id)) }}" class="menu-link px-3 bg-light-primary text-primary ">
+                                            <a href="{{ route('patients.edit', encrypt($patient->id)) }}" class="menu-link px-3 bg-light-primary text-primary ">
 
                                                 <i class="fa fa-edit me-2 text-primary"></i>Edit
                                             </a>
                                         </div>
 
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3 bg-light-warning text-warning">
-                                                <i class="fa fa-eye text-info me-2"></i>View
-                                            </a>
-                                        </div>
-                                        <div class="menu-item px-3">
-                                            <a href="#" onclick="deleteItem({{ $doctor->id }})" class="menu-link px-3 bg-light-danger text-danger">
+                                            <a href="#" onclick="deleteItem({{ $patient->id }})" class="menu-link px-3 bg-light-danger text-danger">
                                                 <i class="fa fa-trash text-danger me-2"></i>Delete
                                             </a>
                                         </div>
@@ -158,11 +147,11 @@
             </div>
 
             {{--            <!--being::Form - Delete Type -->--}}
-            <form id="delete_form" method="POST">
-                @csrf
-                @method('DELETE')
-                <input type="hidden" name="_method" value="DELETE">
-            </form>
+{{--            <form id="delete_form" method="POST">--}}
+{{--                @csrf--}}
+{{--                @method('DELETE')--}}
+{{--                <input type="hidden" name="_method" value="DELETE">--}}
+{{--            </form>--}}
         </div>
     </div>
 @endsection
@@ -172,10 +161,10 @@
     <div class="modal fade" id="kt_modal_new_address" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-top mw-1000px">
             <div class="modal-content">
-                <form class="form" method="post" action="{{ route('doctors.store') }}"  id="add_doctor_form" enctype="multipart/form-data">
+                <form class="form" method="post" action="{{ route('patients.store') }}"  id="add_patient_form" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header" id="kt_modal_new_address_header">
-                        <h3 class="text-center mx-auto">Add New Doctor</h3>
+                        <h3 class="text-center mx-auto">Add New patient</h3>
                         <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                             <i class="ki-duotone ki-cross fs-1">
                                 <span class="path1"></span><span class="path2"></span>
@@ -194,78 +183,75 @@
                             <!--begin::Input group Department Name-->
                             <div class="row mb-5">
                                 <div class="col-6 fv-row">
-                                    <label for="dr_name" class="required fs-5 fw-semibold mb-2">Doctor name</label>
-                                    <input id="dr_name" value="{{ old('dr_name') }}" type="text" class="form-control form-control-solid" placeholder="Doctor name" name="dr_name" autofocus/>
-                                    <div class="text-danger my-1" id="dr_name_error"></div>
+                                    <label for="patient_name" class="required fs-5 fw-semibold mb-2">Patient name</label>
+                                    <input id="patient_name" value="{{ old('patient_name') }}" type="text" class="form-control form-control-solid" placeholder="Patient name" name="patient_name" autofocus/>
+                                    <div class="text-danger my-1" id="patient_name_error"></div>
                                 </div>
 
-                            <!--begin::Input group Department Type-->
-                                <div class="col-6 fv-row">
-                                    <label for="dr_department" class="required fs-5 fw-semibold mb-2">Doctor Department</label>
+                                <!--begin::Input group Department Type-->
+                                <div class="col-3 fv-row">
+                                    <label for="patient_mobile" class="required fs-5 fw-semibold mb-2">Patient Mobile</label>
+                                    <input id="patient_mobile" value="{{ old('patient_mobile') }}" type="number" class="form-control form-control-solid" placeholder="Patient Mobile" name="patient_mobile" autofocus/>
+                                    <div class="text-danger my-1" id="patient_mobile_error"></div>
+                                </div>
+                                <div class="col-3 fv-row">
+                                    <label for="patient_email" class=" fs-5 fw-semibold mb-2">Patient Email</label>
+                                    <input id="patient_email" value="{{ old('patient_email') }}" type="email" class="form-control form-control-solid" placeholder="Patient Email" name="patient_email" autofocus/>
 
-                                    <select name="dr_department" id="" class="js-example-basic-single form-control">
-                                        <option value="" selected> </option>
-                                        @foreach($departments as $department)
-                                        <option value="{{ $department->department_name }}">{{ $department->department_name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="text-danger my-1" id="dr_department_error"></div>
                                 </div>
 
                             </div>
                             <div class="row mb-5">
                                 <div class="col-6 fv-row">
-                                    <label for="dr_designation" class="required fs-5 fw-semibold mb-2">Doctor Designation</label>
-                                    <input id="dr_designation" value="{{ old('dr_designation') }}" type="text" class="form-control form-control-solid" placeholder="Doctor Designation" name="dr_designation" autofocus/>
-                                    <div class="text-danger my-1" id="dr_designation_error"></div>
+                                    <label for="patient_gender" class="required fs-5 fw-semibold mb-2">Patient Gender / Sex</label>
+
+                                    <select name="patient_gender" id="" class="js-example-basic-single form-control">
+                                        <option value="" selected>  </option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <div class="text-danger my-1" id="patient_gender_error"></div>
                                 </div>
 
-                            <!--begin::Input group Department Type-->
                                 <div class="col-6 fv-row">
-                                    <label for="dr_phone" class="required fs-5 fw-semibold mb-2">Doctor Phone</label>
-                                    <input id="dr_phone" value="{{ old('dr_phone') }}" type="number" class="form-control form-control-solid" placeholder="Doctor Phone" name="dr_phone" autofocus/>
-                                    <div class="text-danger my-1" id="dr_phone_error"></div>
+                                    <label for="" class="fs-5 fw-semibold mb-2">Patient Blood Group</label>
+
+                                    <select name="patient_blood_group" id="" class="js-example-basic-single form-control">
+                                        <option value="" selected> </option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="row mb-5">
+                                <div class="col-6 fv-row">
+                                    <label for="patient_age" class=" fs-5 fw-semibold mb-2">Patient Age</label>
+                                    <input id="patient_age" value="{{ old('patient_age') }}" type="number" class="form-control form-control-solid" placeholder="Patient Age" name="patient_age" autofocus/>
+                                </div>
+                                <div class="col-6 fv-row">
+                                    <label for="" class="fs-5 fw-semibold mb-2">Unit</label>
+                                    <select name="unit" id="" class="js-example-basic-single form-control">
+                                        <option value="years" selected>Years</option>
+                                        <option value="month" >Month</option>
+                                        <option value="day" >Day</option>
+                                    </select>
                                 </div>
 
                             </div>
                             <!--begin::Input group Department Description-->
                             <div class="row mb-5">
-                                <div class="col-6 fv-row">
-                                    <label for="dr_email" class="fs-5 fw-semibold mb-2">Doctor Email</label>
-                                    <input id="dr_email" value="{{ old('dr_email') }}" type="email" class="form-control form-control-solid" placeholder="Doctor Email" name="dr_email" autofocus/>
-                                    <div class="text-danger my-1" id="dr_email_error"></div>
+                                <div class="col-12 fv-row">
+                                    <label for="patient_address" class=" fs-5 fw-semibold mb-2">Patient Address</label>
+                                    <textarea name="patient_address" id="" class="form-control" cols="30" rows="2" placeholder="Patient Address">{{ old('patient_address') }}</textarea>
                                 </div>
-                                <div class="col-6 fv-row">
-                                    <label for="dr_biography" class=" fs-5 fw-semibold mb-2">Doctor Biography</label>
-                                    <textarea name="dr_biography" id="" class="form-control" cols="30" rows="2" placeholder="Doctor Biography">{{ old('dr_biography') }}</textarea>
-                                </div>
-                            </div>
-                            <div class="row mb-5">
-                                <div class="col-6 fv-row">
-                                    <label for="dr_specialization" class=" fs-5 fw-semibold mb-2">Doctor Specialization</label>
-                                    <textarea name="dr_specialization" id="" class="form-control" cols="30" rows="2" placeholder="Doctor Specialization">{{ old('dr_specialization') }}</textarea>
-                                </div>
-                                <div class="col-6 fv-row">
-                                    <label for="dr_experience" class=" fs-5 fw-semibold mb-2">Doctor Experience</label>
-                                    <textarea name="dr_experience" id="" class="form-control" cols="30" rows="2" placeholder="Doctor Experience">{{ old('dr_experience') }}</textarea>
-                                </div>
-
-                            </div>
-
-                            <div class="row mb-5">
-                                <div class="col-6 fv-row">
-                                    <label for="dr_qualification" class=" fs-5 fw-semibold mb-2">Doctor Qualification</label>
-                                    <textarea name="dr_qualification" id="" class="form-control" cols="30" rows="2" placeholder="Doctor Qualification">{{ old('dr_qualification') }}</textarea>
-                                </div>
-                                <div class="col-6 fv-row">
-                                    <div class="form-group">
-                                        <label for="" class="fs-5 fw-semibold mb-2">Upload Doctor Picture</label>
-                                        <div class=" form-control">
-                                            <input type="file" name="image" id="">
-                                        </div>
-                                    </div>
-                                </div>
-
 
                             </div>
                         </div>
@@ -312,15 +298,17 @@
             })
         }
     </script>
-    {{--        Add Doctor --}}
+
+    {{--        Add Patient --}}
     <script>
 
         $(document).ready(function () {
-            $("#add_doctor_form").on("submit", function (e) {
+            $("#add_patient_form").on("submit", function (e) {
                 e.preventDefault();
 
                 $(".text-danger").text('');
                 const formData = new FormData($(this)[0]);
+
 
 
                 $.ajax({
@@ -332,7 +320,6 @@
                     contentType: false,
 
                     success: function (response) {
-
                         // Change the button text to "Adding..."
                         $("#submitBtn .indicator-label").text("Adding...");
                         $("#submitBtn .indicator-progress").show();
@@ -344,7 +331,7 @@
                             }).then(function (result) {
                                 if (result.isConfirmed) {
                                     // Redirect to the index page
-                                    window.location.href = '{{ route('doctors.index') }}';
+                                    window.location.href = '{{ route('patients.index') }}';
                                 }
                             });
                         }
@@ -367,56 +354,11 @@
 
     </script>
 
-    <script>
-{{--  deleted All Selected field--}}
-        $(document).ready(function() {
-            $('#select-all-checkbox').on('click', function() {
-                $('.checkbox-ids').prop('checked', $(this).prop('checked'));
-            });
-
-            $("#selected-Data-Delete").on('click', function (e) {
-                e.preventDefault();
-
-                let all_ids = [];
-                $('input:checkbox[name=ids]:checked').each(function () {
-                    all_ids.push($(this).val());
-                });
-
-                // Add a SweetAlert confirmation dialog
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // User clicked "Yes, delete it!" in the confirmation dialog
-                        $.ajax({
-                            url: "{{ route('doctors.all-Delete') }}",
-                            type: "DELETE",
-                            data: {
-                                ids: all_ids,
-                                _token: '{{ csrf_token() }}'
-                            },
-                            success: function (response) {
-                                $.each(all_ids, function (key, val) {
-                                    $('#doctor_ids' + val).remove();
-                                });
-                            }
-                        });
-                    }
-                });
-            });
-        });
-    </script>
 
 
 
     <!--begin::Vendors Javascript(used for this page only)-->
-{{--    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--}}
+    {{--    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--}}
     <script src="{{ asset('/') }}assets/plugins/custom/datatables/datatables.bundle.js"></script>
 
 
@@ -438,7 +380,7 @@
         $(document).ready(function() {
             $('.js-example-basic-single').select2(
                 {
-                    placeholder: 'Select an Doctor department',
+                    placeholder: 'Select an Option',
                 }
             );
 
@@ -450,6 +392,7 @@
     </script>
 
 @endsection
+
 
 
 
