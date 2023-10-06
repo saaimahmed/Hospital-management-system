@@ -136,11 +136,13 @@
 
                 <!--begin::Modal footer-->
                 <div class="modal-footer flex-center">
-                    <button type="submit" id="kt_modal_new_address_submit1" class="btn btn-primary">
-                        <span class="indicator-label">Update</span>
+                    <button type="submit" id="updateBtn" class="btn btn-primary d-flex justify-content-center align-content-center">
+                        <span class="indicator-label pt-2 text-white">Update
+                        </span>
                         <span class="indicator-progress">
-                                Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                             </span>
+
                     </button>
                 </div>
             </form>
@@ -160,6 +162,9 @@
 
                 $(".text-danger").text('');
                 const formData = new FormData($(this)[0]);
+
+                $("#updateBtn .indicator-label").text("updating...");
+                $("#updateBtn .indicator-progress").show();
 
                 $.ajax({
                     url: $(this).attr('action'),
