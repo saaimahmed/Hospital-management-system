@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('old_patient_fee')->nullable();
             $table->string('report_fee')->nullable();
             $table->tinyInteger('status')->default(1)->comment(' 1 => Active , 0 => deactivated');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

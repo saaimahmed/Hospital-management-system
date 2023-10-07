@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HMS2\DepartmentController;
 use App\Http\Controllers\HMS2\DoctorController;
-use App\Http\Controllers\HMS1\PatientController;
+use App\Http\Controllers\HMS2\PatientController;
 use App\Http\Controllers\HMS2\ScheduleController;
 
 
@@ -52,11 +52,37 @@ Route::controller(PatientController::class)->prefix('patients')->group(function 
     Route::post('/store','store')->name('patients.store');
     Route::get('/edit/{id}','edit')->name('patients.edit');
     Route::put('/update/{id}','update')->name('patients.update');
+    Route::delete('/destroy/{id}','destroy')->name('patients.destroy');
+    //soft delete
+    Route::get('/soft-deletes','softDelete')->name('patients.soft-delete');
+    Route::get('/restore/{id}','restore')->name('patients.restore');
+    //Selected data delete
+    Route::delete('/all-delete','selectedDelete')->name('patients.all-Delete');
+    Route::get('/all-restore','allRestore')->name('patients.all-restore');
+    //permanent force delete
+    Route::delete('/permanent-delete/{id}','permanentDelete')->name('patients.permanent-delete');
+    Route::post('/select-permanent-delete','selectPermanentDelete')->name('patients.select-permanent-delete');
 });
+
+
 //schedule Controller
 Route::controller(ScheduleController::class)->prefix('schedules')->group(function (){
     Route::get('/index','index')->name('schedules.index');
     Route::post('/store','store')->name('schedules.store');
+    Route::get('/edit/{id}','edit')->name('schedules.edit');
+    Route::put('/update/{id}','update')->name('schedules.update');
+    Route::get('/status/{id}','status')->name('schedules.status');
+    Route::delete('/destroy/{id}','destroy')->name('schedules.destroy');
+    //soft delete
+    Route::get('/soft-deletes','softDelete')->name('schedules.soft-delete');
+    Route::get('/restore/{id}','restore')->name('schedules.restore');
+    //Selected data delete
+    Route::delete('/all-delete','selectedDelete')->name('schedules.all-Delete');
+    Route::get('/all-restore','allRestore')->name('schedules.all-restore');
+
+    //permanent force delete
+    Route::delete('/permanent-delete/{id}','permanentDelete')->name('schedules.permanent-delete');
+    Route::post('/select-permanent-delete','selectPermanentDelete')->name('schedules.select-permanent-delete');
 });
 
 

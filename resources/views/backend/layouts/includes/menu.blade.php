@@ -93,22 +93,11 @@
                                 <span class="menu-title">All Patient List</span></a>
                         </div>
 
-{{--                        <div class="menu-item">--}}
-{{--                            <a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>--}}
-{{--                                <span class="menu-title">Patient Trash</span>--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
-
-                        {{--                        <div class="menu-item">--}}
-                        {{--                            <a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>--}}
-                        {{--                                <span class="menu-title">Districts</span>--}}
-                        {{--                            </a>--}}
-                        {{--                        </div>--}}
-                        {{--                        <div class="menu-item">--}}
-                        {{--                            <a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>--}}
-                        {{--                                <span class="menu-title">Divisions</span>--}}
-                        {{--                            </a>--}}
-                        {{--                        </div>--}}
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('patients.soft-delete') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                                <span class="menu-title">Patient Trash</span>
+                            </a>
+                        </div>
 
                     </div>
                 </div>
@@ -144,7 +133,7 @@
                                 <div class="menu-item"><a class="menu-link" href="{{ route('schedules.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
                                         <span class="menu-title">All Schedule List</span></a>
                                 </div>
-                                <div class="menu-item"><a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                                <div class="menu-item"><a class="menu-link" href="{{ route('schedules.soft-delete') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
                                         <span class="menu-title">Schedule Trash</span></a>
                                 </div>
 

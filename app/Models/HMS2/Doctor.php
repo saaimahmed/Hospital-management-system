@@ -12,11 +12,15 @@ class Doctor extends Model
     use softDeletes;
     protected $fillable = [
 
-        'dr_name','dr_department','dr_designation','dr_email','dr_phone','image',
+       'dr_id','dr_name','dr_department','dr_designation','dr_email','dr_phone','image',
         'dr_biography','dr_specialization','dr_experience','dr_qualification',
         'status','deleted_at',
 
     ];
+
+    public function schedule(){
+        $this->hasMany(Schedule::class);
+    }
 
 
 }
