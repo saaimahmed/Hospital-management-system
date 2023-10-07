@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Doctor Trash')
+@section('title', 'Schedule Trash')
 
 @section('style')
     <link href="{{ asset('/') }}assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
@@ -13,7 +13,7 @@
         <div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
                 <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-3">
-                    Doctor Trash List
+                    Schedule Trash List
                 </h1>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <li class="breadcrumb-item text-muted">
@@ -23,13 +23,13 @@
                         <span class="bullet bg-gray-400 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{ route('doctors.index') }}" class="text-muted text-hover-primary">Show All Doctors</a>
+                        <a href="{{ route('schedules.index') }}" class="text-muted text-hover-primary">Show All Schedule</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-400 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        Doctor Trash List
+                        Schedule Trash List
                     </li>
                 </ul>
             </div>
@@ -49,7 +49,7 @@
                         </li>
                         <li class="nav-link">
 
-{{--                            <a href="" class=""><i class="fa fa-trash fs-2x text-danger"></i></a>--}}
+                            {{--                            <a href="" class=""><i class="fa fa-trash fs-2x text-danger"></i></a>--}}
 
                             <a data-bs-toggle="tooltip" data-bs-placement="top" title="" class="delete-btn-group py-5" id="select-force-delete" href="" data-bs-original-title="Delete Selected" aria-label="Delete Selected"><i class="fa fa-trash fs-2x text-danger"></i></a>
                         </li>
@@ -70,7 +70,7 @@
                             </i>
                             <input type="text" data-kt-ecommerce-category-filter="search"
                                    class="form-control form-control-solid w-250px ps-12"
-                                   placeholder="Search Doctor"/>
+                                   placeholder="Search Schedule"/>
                         </div>
                     </div>
 
@@ -87,30 +87,43 @@
                                     <label class="form-check-label" for="select-all-checkbox"></label>
                                 </div>
                             </th>
-                            <th class="min-w-50px ps-5">id</th>
-                            <th class="min-w-100px ps-5">Doctor image</th>
+                            <th class="min-w-50px ps-5">Schedule id</th>
                             <th class="min-w-100px ps-5">Doctor Name</th>
-                            <th class="min-w-100px">Designation</th>
-                            <th class="min-w-100px">Department</th>
-                            <th class="min-w-50px">phone</th>
-                            <th class="text-end min-w-100px pe-5">Actions</th>
+                            <th class="min-w-100px">Fees</th>
+                            <th class="min-w-100px">Days</th>
+                            <th class="min-w-50px">Visiting hour</th>
+                            <th class="text-end min-w-70px pe-5">Actions</th>
                         </tr>
                         </thead>
                         <tbody class="fw-semibold text-gray-600">
 
-                        @foreach($doctors as $doctor)
-                            <tr id="doctor_ids{{ $doctor->id }}">
+                        @foreach($schedules as $schedule)
+                            <tr id="schedule_ids{{ $schedule->id }}">
                                 <td>
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" name="ids" class="checkbox-ids" type="checkbox" value="{{ $doctor->id }}"/>
+                                        <input class="form-check-input" name="ids" class="checkbox-ids" type="checkbox" value="{{ $schedule->id }}"/>
                                     </div>
                                 </td>
-                                <td>{{ $doctor->dr_id}}</td>
-                                <td><img src="{{ $doctor->image ? asset( $doctor->image  ) : asset('assets/media/avatars/avater.jpg') }}" alt="" style="width: 60px; height: 60px;" class="image-thumbnail rounded-circle object-fit-cover"></td>
-                                <td>{{ $doctor->dr_name }}</td>
-                                <td>{{ $doctor->dr_designation }}</td>
-                                <td>{{ $doctor->dr_department }}</td>
-                                <td>{{ $doctor->dr_phone }}</td>
+                                <td>{{ $schedule->id}}</td>
+
+                                @if ($schedule->doctor)
+                                    <td>{{ $schedule->doctor->dr_name }}</td>
+                                @else
+                                    <td> null </td>
+                                @endif
+                                <td><strong>New Patient: </strong><span class="text-success">{{ $schedule->new_patient_fee }} Tk</span><br>
+                                    <strong>Old Patient: </strong><span class="text-info">{{ $schedule->old_patient_fee }} Tk</span><br>
+                                    <strong>Report: </strong><span class="text-warning">{{ $schedule->report_fee }} Tk</span></strong><br>
+                                </td>
+                                <td>{{ $schedule->schedule_days  }}</td>
+
+
+                                <td>
+
+                                    <strong>Start Time: </strong><span class="text-success">{{ \Carbon\Carbon::parse( $schedule->start_time )->format('h:i A')}}</span><br>
+                                    <strong>Start Time: </strong><span class="text-danger">{{ \Carbon\Carbon::parse( $schedule->end_time )->format('h:i A')}}</span><br>
+                                </td>
+
                                 <td class="text-end">
                                     <a href="#" class="btn btn-sm btn-light btn-active-light-primary btn-flex btn-center"
                                        data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -119,13 +132,13 @@
                                     </a>
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
                                         <div  class="menu-item px-3 mb-1">
-                                            <a href="{{ route('doctors.restore', encrypt($doctor->id)) }}" class="menu-link px-3 bg-light-success text-success ">
+                                            <a href="{{ route('schedules.restore', encrypt($schedule->id)) }}" class="menu-link px-3 bg-light-success text-success ">
 
                                                 <i class="fas fa-undo me-2 text-success"></i>Restore
                                             </a>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a href="#" onclick="deleteItem({{ $doctor->id }})" class="menu-link px-3 bg-light-danger text-danger">
+                                            <a href="#" onclick="deleteItem({{ $schedule->id }})" class="menu-link px-3 bg-light-danger text-danger">
                                                 <i class="fa fa-trash text-danger me-2"></i>Delete
                                             </a>
                                         </div>
@@ -186,7 +199,7 @@
 
 
     {{-- Restore Selected field--}}
-        <script>
+    <script>
         $(document).ready(function() {
             $('#select-all-checkbox').on('click', function() {
                 $('.checkbox-ids').prop('checked', $(this).prop('checked'));
@@ -213,7 +226,7 @@
                     if (result.isConfirmed) {
                         // User clicked "Yes, delete it!" in the confirmation dialog
                         $.ajax({
-                            url: "{{ route('doctors.all-restore') }}",
+                            url: "{{ route('schedules.all-restore') }}",
                             type: "get",
                             data: {
                                 ids: all_ids,
@@ -221,7 +234,7 @@
                             },
                             success: function (response) {
                                 $.each(all_ids, function (key, val) {
-                                    $('#doctor_ids' + val).remove();
+                                    $('#schedule_ids' + val).remove();
                                 });
                             }
                         });
@@ -229,9 +242,9 @@
                 });
             });
         });
-         </script>
+    </script>
     {{--Forece Delete  Selected field--}}
-        <script>
+    <script>
         $(document).ready(function() {
             $('#select-all-checkbox').on('click', function() {
                 $('.checkbox-ids').prop('checked', $(this).prop('checked'));
@@ -258,7 +271,7 @@
                     if (result.isConfirmed) {
                         // User clicked "Yes, delete it!" in the confirmation dialog
                         $.ajax({
-                            url: "{{ route('doctors.select-permanent-delete') }}",
+                            url: "{{ route('schedules.select-permanent-delete') }}",
                             type: "post",
                             data: {
                                 ids: all_ids,
@@ -266,7 +279,7 @@
                             },
                             success: function (response) {
                                 $.each(all_ids, function (key, val) {
-                                    $('#doctor_ids' + val).remove();
+                                    $('#schedule_ids' + val).remove();
                                 });
                             }
                         });
@@ -298,6 +311,7 @@
 
 
 @endsection
+
 
 
 

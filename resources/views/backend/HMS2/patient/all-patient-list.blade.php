@@ -108,7 +108,7 @@
                                         <input class="form-check-input" name="ids" class="checkbox-ids" type="checkbox" value="{{ $patient->id }}"/>
                                     </div>
                                 </td>
-                                <td>{{ $patient->custom_id}}</td>
+                                <td>{{ $patient->patient_id}}</td>
                                 <td>{{ $patient->patient_name }}</td>
                                 <td>{{ $patient->patient_mobile }}</td>
                                 <td>{{ $patient->patient_gender  }}</td>
@@ -147,11 +147,11 @@
             </div>
 
             {{--            <!--being::Form - Delete Type -->--}}
-{{--            <form id="delete_form" method="POST">--}}
-{{--                @csrf--}}
-{{--                @method('DELETE')--}}
-{{--                <input type="hidden" name="_method" value="DELETE">--}}
-{{--            </form>--}}
+            <form id="delete_form" method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" name="_method" value="DELETE">
+            </form>
         </div>
     </div>
 @endsection
@@ -218,7 +218,7 @@
                                     <label for="" class="fs-5 fw-semibold mb-2">Patient Blood Group</label>
 
                                     <select name="patient_blood_group" id="" class="js-example-basic-single form-control">
-                                        <option value="" selected> </option>
+                                        <option value="" selected><== Select Blood group ==></option>
                                         <option value="A+">A+</option>
                                         <option value="A-">A-</option>
                                         <option value="B+">B+</option>
@@ -233,8 +233,9 @@
                             </div>
                             <div class="row mb-5">
                                 <div class="col-6 fv-row">
-                                    <label for="patient_age" class=" fs-5 fw-semibold mb-2">Patient Age</label>
+                                    <label for="patient_age" class="required fs-5 fw-semibold mb-2">Patient Age</label>
                                     <input id="patient_age" value="{{ old('patient_age') }}" type="number" class="form-control form-control-solid" placeholder="Patient Age" name="patient_age" autofocus/>
+                                    <div class="text-danger my-1" id="patient_age_error"></div>
                                 </div>
                                 <div class="col-6 fv-row">
                                     <label for="" class="fs-5 fw-semibold mb-2">Unit</label>
@@ -301,7 +302,6 @@
 
     {{--        Add Patient --}}
     <script>
-
         $(document).ready(function () {
             $("#add_patient_form").on("submit", function (e) {
                 e.preventDefault();
@@ -350,11 +350,53 @@
                 });
             });
         });
-
-
     </script>
 
+    <script>
+        {{--  deleted All Selected field--}}
+        $(document).ready(function() {
+            $('#select-all-checkbox').on('click', function() {
+                $('.checkbox-ids').prop('checked', $(this).prop('checked'));
+            });
 
+            $("#selected-Data-Delete").on('click', function (e) {
+                e.preventDefault();
+
+                let all_ids = [];
+                $('input:checkbox[name=ids]:checked').each(function () {
+                    all_ids.push($(this).val());
+                });
+
+                // Add a SweetAlert confirmation dialog
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // User clicked "Yes, delete it!" in the confirmation dialog
+                        $.ajax({
+                            url: "{{ route('patients.all-Delete') }}",
+                            type: "DELETE",
+                            data: {
+                                ids: all_ids,
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function (response) {
+                                $.each(all_ids, function (key, val) {
+                                    $('#patient_ids' + val).remove();
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 
 
     <!--begin::Vendors Javascript(used for this page only)-->

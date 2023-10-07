@@ -111,7 +111,7 @@
                                         <input class="form-check-input" name="ids" class="checkbox-ids" type="checkbox" value="{{ $doctor->id }}"/>
                                     </div>
                                 </td>
-                                <td>{{ $doctor->custom_id}}</td>
+                                <td>{{ $doctor->dr_id}}</td>
                                 <td><img src="{{ $doctor->image ? asset( $doctor->image  ) : asset('assets/media/avatars/avater.jpg') }}" alt="" style="width: 60px; height: 60px;" class="image-thumbnail rounded-circle object-fit-cover"></td>
                                 <td>{{ $doctor->dr_name }}</td>
                                 <td>{{ $doctor->dr_designation }}</td>

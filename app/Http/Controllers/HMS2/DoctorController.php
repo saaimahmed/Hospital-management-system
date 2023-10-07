@@ -7,34 +7,17 @@ use App\Http\Controllers\Controller;
 use App\Models\HMS2\Department;
 use App\Models\HMS2\Doctor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DoctorController extends Controller
 {
-    public function index()
-    {
-        $doctors = Doctor::latest()->get(['id', 'dr_name', 'dr_designation', 'dr_department', 'dr_phone', 'status', 'image']);
+    public function index(){
 
-        if ($doctors->isEmpty()) {
-            return view('backend.HMS2.doctor.all-doctor-list', [
+         return view('backend.HMS2.doctor.all-doctor-list', [
                 'departments' => Department::where('status', 1)->where('department_type', 'doctor')->get(['id', 'department_name']),
-                'doctors' => $doctors,
+                'doctors' => Doctor::latest()->get(['id','dr_id','dr_name', 'dr_designation', 'dr_department', 'dr_phone', 'status', 'image']),
             ]);
-        } else {
-            $doctors = $doctors->reverse();
 
-            $lastId = $doctors->first()->id;
-            $customId = $lastId;
-
-            $formattedDoctors = $doctors->map(function ($doctor) use (&$customId) {
-                $doctor->custom_id = 'DR-' . $customId--;
-                return $doctor;
-            });
-
-            return view('backend.HMS2.doctor.all-doctor-list', [
-                'departments' => Department::where('status', 1)->where('department_type', 'doctor')->get(['id', 'department_name']),
-                'doctors' => $formattedDoctors,
-            ]);
-        }
     }
 
     public function store(Request $request){
@@ -53,20 +36,24 @@ class DoctorController extends Controller
         $imageUrl = Helper::getImageUrl($image, $imageDirectory);
 
           $doctor = new Doctor();
+//          $doctor->dr_id                  = "HMS-DR".DB::table('doctors')->latest()->value('id')+1;
+
           $doctor->dr_name                = $request->dr_name;
           $doctor->dr_department          = $request->dr_department;
           $doctor->dr_designation         = $request->dr_designation;
-          $doctor->dr_phone                = $request->dr_phone;
-          $doctor->dr_email                = $request->dr_email;
-          $doctor->dr_biography                = $request->dr_biography;
-          $doctor->dr_specialization                = $request->dr_specialization;
-          $doctor->dr_experience                = $request->dr_experience;
-          $doctor->dr_qualification                = $request->dr_qualification;
-
+          $doctor->dr_phone               = $request->dr_phone;
+          $doctor->dr_email               = $request->dr_email;
+          $doctor->dr_biography           = $request->dr_biography;
+          $doctor->dr_specialization      = $request->dr_specialization;
+          $doctor->dr_experience          = $request->dr_experience;
+          $doctor->dr_qualification       = $request->dr_qualification;
           $doctor->image                  = $imageUrl;
-
           $doctor->save();
-          return response()->json([
+
+          $doctor->dr_id = "HMS-DR" . $doctor->id;
+          $doctor->save();
+
+        return response()->json([
             'status' => 'success',
             'message' => 'Department added successfully.'
          ], 200);
@@ -90,12 +77,7 @@ class DoctorController extends Controller
 
         ]);
 
-
         $doctor = Doctor::find(decrypt($id));
-
-
-
-
         $doctor->dr_name                = $request->dr_name;
         $doctor->dr_department          = $request->dr_department;
         $doctor->dr_designation         = $request->dr_designation;
@@ -146,7 +128,7 @@ class DoctorController extends Controller
 
     public function softDelete(){
         return view('backend.HMS2.doctor.all-doctor-trash',[
-            'doctors' => Doctor::onlyTrashed()->latest()->get(['id', 'dr_name', 'dr_designation', 'dr_department', 'dr_phone', 'status', 'image']),
+            'doctors' => Doctor::onlyTrashed()->latest()->get(['id','dr_id','dr_name', 'dr_designation', 'dr_department', 'dr_phone', 'status', 'image']),
         ]);
     }
 
@@ -156,6 +138,16 @@ class DoctorController extends Controller
         return redirect()->back()->with('success', 'Doctor Restore successfully.');
 
     }
+
+    public function selectedDelete(Request $request) {
+
+        $Ids = $request->ids;
+
+        Doctor::whereIn('id',  $Ids)->delete();
+
+        return response()->json(['message' => 'Selected data deleted successfully']);
+    }
+
     public function allRestore(Request $request) {
         $Ids = $request->ids;
 
@@ -179,14 +171,6 @@ class DoctorController extends Controller
         return redirect()->back()->with('success', 'Select Permanently Doctor delete successfully.');
     }
 
-    public function selectedDelete(Request $request) {
-
-        $Ids = $request->ids;
-
-        Doctor::whereIn('id',  $Ids)->delete();
-
-        return response()->json(['message' => 'Selected data deleted successfully']);
-    }
 
 
 }

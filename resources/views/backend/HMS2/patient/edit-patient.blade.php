@@ -59,19 +59,29 @@
                                     <input id="patient_name" value="{{ old('patient_name')  ?? $patient->patient_name }}" type="text" class="form-control form-control-solid" placeholder="Patient name" name="patient_name" autofocus/>
                                     <div class="text-danger my-1" id="patient_name_error"></div>
                                 </div>
+                                <div class="col-6 fv-row">
+                                    <label for="patient_id" class="required fs-5 fw-semibold mb-2">Patient Id</label>
+                                    <input id="patient_id" value="{{ old('patient_id')  ?? $patient->patient_id }}" type="text" class="form-control form-control-solid" placeholder="Patient Id" name="patient_id" autofocus readonly/>
+                                    <div class="text-danger my-1" id="patient_id_error"></div>
+                                </div>
 
                                 <!--begin::Input group Department Type-->
-                                <div class="col-3 fv-row">
+
+
+                            </div>
+
+                            <div class="row mb-5">
+
+                                <div class="col-6 fv-row">
                                     <label for="patient_mobile" class="required fs-5 fw-semibold mb-2">Patient Mobile</label>
                                     <input id="patient_mobile" value="{{ old('patient_mobile') ?? $patient->patient_mobile }}" type="number" class="form-control form-control-solid" placeholder="Patient Mobile" name="patient_mobile" autofocus/>
                                     <div class="text-danger my-1" id="patient_mobile_error"></div>
                                 </div>
-                                <div class="col-3 fv-row">
+                                <div class="col-6 fv-row">
                                     <label for="patient_email" class=" fs-5 fw-semibold mb-2">Patient Email</label>
                                     <input id="patient_email" value="{{ old('patient_email') ?? $patient->patient_email}}" type="email" class="form-control form-control-solid" placeholder="Patient Email" name="patient_email" autofocus/>
 
                                 </div>
-
                             </div>
                             <div class="row mb-5">
                                 <div class="col-6 fv-row">
@@ -105,8 +115,9 @@
                             </div>
                             <div class="row mb-5">
                                 <div class="col-6 fv-row">
-                                    <label for="patient_age" class=" fs-5 fw-semibold mb-2">Patient Age</label>
+                                    <label for="patient_age" class="required fs-5 fw-semibold mb-2">Patient Age</label>
                                     <input id="patient_age" value="{{ old('patient_age') ?? $patient->patient_age }}" type="number" class="form-control form-control-solid" placeholder="Patient Age" name="patient_age" autofocus/>
+                                    <div class="text-danger my-1" id="patient_age_error"></div>
                                 </div>
                                 <div class="col-6 fv-row">
                                     <label for="" class="fs-5 fw-semibold mb-2">Unit</label>

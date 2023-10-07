@@ -8,6 +8,7 @@
 @endsection
 
 @section('body')
+
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6">
         <div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
@@ -100,20 +101,33 @@
                         <tbody class="fw-semibold text-gray-600">
 
                         @foreach($schedules as $schedule)
-                            <tr id="doctor_ids{{ $schedule->id }}">
+                            <tr id="schedule_ids{{ $schedule->id }}">
                                 <td>
                                     <div class="form-check form-check-sm form-check-custom form-check-solid ">
                                         <input class="form-check-input" name="ids" class="checkbox-ids" type="checkbox" value="{{ $schedule->id }}"/>
                                     </div>
                                 </td>
                                 <td>{{ $schedule->id}}</td>
-                                <td>{{ $schedule->doctor_id }}</td>
-                                <td>{{ $schedule->new_patient_fee }}</td>
-                                <td></td>
-                                <td>{{ $schedule->start_time }}{{$schedule->end_time}}</td>
+
+                                @if ($schedule->doctor)
+                                    <td>{{ $schedule->doctor->dr_name }}</td>
+                                @else
+                                    <td>Null</td>
+                                @endif
+
+                                <td><strong>New Patient: </strong><span class="text-success">{{ $schedule->new_patient_fee }} Tk</span><br>
+                                    <strong>Old Patient: </strong><span class="text-info">{{ $schedule->old_patient_fee }} Tk</span><br>
+                                    <strong>Report: </strong><span class="text-warning">{{ $schedule->report_fee }} Tk</span></strong><br>
+                                </td>
+                                <td>{{ $schedule->schedule_days  }}</td>
 
                                 <td>
-                                    <a href="" id="status-change">
+
+                                    <strong>Start Time: </strong><span class="text-success">{{ \Carbon\Carbon::parse( $schedule->start_time )->format('h:i A')}}</span><br>
+                                    <strong>Start Time: </strong><span class="text-danger">{{ \Carbon\Carbon::parse( $schedule->end_time )->format('h:i A')}}</span><br>
+                                </td>
+                                <td>
+                                    <a href="{{ route('schedules.status', encrypt($schedule->id)) }}" id="status-change">
                                         <div class="badge {{ $schedule->status === 1 ? 'badge-light-success' : 'badge-light-danger' }}">{{  $schedule->status === 1 ? 'Active' : 'Deactivated'}}</div>
                                     </a>
                                 </td>
@@ -125,7 +139,7 @@
                                     </a>
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
                                         <div  class="menu-item px-3 mb-1">
-                                            <a href="" class="menu-link px-3 bg-light-primary text-primary ">
+                                            <a href="{{ route('schedules.edit',encrypt($schedule->id)) }}" class="menu-link px-3 bg-light-primary text-primary ">
 
                                                 <i class="fa fa-edit me-2 text-primary"></i>Edit
                                             </a>
@@ -346,7 +360,51 @@
 
     </script>
 
+    <script>
+        {{--  deleted All Selected field--}}
+        $(document).ready(function() {
+            $('#select-all-checkbox').on('click', function() {
+                $('.checkbox-ids').prop('checked', $(this).prop('checked'));
+            });
 
+            $("#selected-Data-Delete").on('click', function (e) {
+                e.preventDefault();
+
+                let all_ids = [];
+                $('input:checkbox[name=ids]:checked').each(function () {
+                    all_ids.push($(this).val());
+                });
+
+                // Add a SweetAlert confirmation dialog
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // User clicked "Yes, delete it!" in the confirmation dialog
+                        $.ajax({
+                            url: "{{ route('schedules.all-Delete') }}",
+                            type: "DELETE",
+                            data: {
+                                ids: all_ids,
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function (response) {
+                                $.each(all_ids, function (key, val) {
+                                    $('#schedule_ids' + val).remove();
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 
 
 
