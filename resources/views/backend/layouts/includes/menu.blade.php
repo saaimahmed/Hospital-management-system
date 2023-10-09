@@ -157,7 +157,7 @@
                          <span class="menu-title">Appointments</span><span class="menu-arrow"></span>
                      </span>
                             <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                <div class="menu-item"><a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                                <div class="menu-item"><a class="menu-link" href="{{ route('appointments.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
                                         <span class="menu-title">All Appointments List</span></a>
                                 </div>
                                 <div class="menu-item"><a class="menu-link" href=""><span class="menu-bullet"><span class="bullet bullet-dot"></span></span>

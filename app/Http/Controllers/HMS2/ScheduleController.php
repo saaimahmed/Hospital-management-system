@@ -13,7 +13,7 @@ class ScheduleController extends Controller
     public function index(){
         return view('backend.HMS2.schedule.all-schedule-list',[
             'doctors' => Doctor::where('status', 1)->get(['id', 'dr_name']),
-            'schedules' => Schedule::latest()->get(),
+            'schedules' => Schedule::orderBy('id','DESC')->get(),
         ]);
     }
 

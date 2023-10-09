@@ -5,6 +5,7 @@ use App\Http\Controllers\HMS2\DepartmentController;
 use App\Http\Controllers\HMS2\DoctorController;
 use App\Http\Controllers\HMS2\PatientController;
 use App\Http\Controllers\HMS2\ScheduleController;
+use App\Http\Controllers\HMS2\AppointmentController;
 
 
 /*
@@ -45,7 +46,6 @@ Route::controller(DoctorController::class)->prefix('doctors')->group(function ()
     Route::delete('/permanent-delete/{id}','permanentDelete')->name('doctors.permanent-delete');
     Route::post('/select-permanent-delete','selectPermanentDelete')->name('doctors.select-permanent-delete');
 });
-
 //patient controller
 Route::controller(PatientController::class)->prefix('patients')->group(function (){
     Route::get('/index','index')->name('patients.index');
@@ -63,8 +63,6 @@ Route::controller(PatientController::class)->prefix('patients')->group(function 
     Route::delete('/permanent-delete/{id}','permanentDelete')->name('patients.permanent-delete');
     Route::post('/select-permanent-delete','selectPermanentDelete')->name('patients.select-permanent-delete');
 });
-
-
 //schedule Controller
 Route::controller(ScheduleController::class)->prefix('schedules')->group(function (){
     Route::get('/index','index')->name('schedules.index');
@@ -84,6 +82,12 @@ Route::controller(ScheduleController::class)->prefix('schedules')->group(functio
     Route::delete('/permanent-delete/{id}','permanentDelete')->name('schedules.permanent-delete');
     Route::post('/select-permanent-delete','selectPermanentDelete')->name('schedules.select-permanent-delete');
 });
+//Appointment Controller
+Route::controller(AppointmentController::class)->prefix('appointments')->group(function (){
+    Route::get('/index','index')->name('appointments.index');
+    Route::get('/get-patients','getPatients')->name('get.patients');
+});
+
 
 
 
