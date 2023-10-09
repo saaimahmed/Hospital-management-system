@@ -201,9 +201,9 @@
 
                             <!--begin::Input group Department Type-->
                                 <div class="col-6 fv-row">
-                                    <label for="dr_department" class="required fs-5 fw-semibold mb-2">Doctor Department</label>
+                                    <label for="" class="required fs-5 fw-semibold mb-2">Doctor Department</label>
 
-                                    <select name="dr_department" id="" class="js-example-basic-single form-control">
+                                    <select name="" id="" class="js-example-basic-single form-control">
                                         <option value="" selected> </option>
                                         @foreach($departments as $department)
                                         <option value="{{ $department->department_name }}">{{ $department->department_name }}</option>

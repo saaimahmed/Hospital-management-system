@@ -205,29 +205,89 @@
                                 <!--begin::Input group Department Type-->
                                 <div class="col-6 fv-row">
                                     <label for="patient_search" class="required fs-5 fw-semibold mb-2">Patient Name or ID</label>
-                                    <input type="text" name="patient_name" id="patient_search" placeholder="Search Patient Name or ID..." class="form-control">
+                                    <input type="text" name="patient_id" id="patient_search" placeholder="Search Patient Name or ID..." class="form-control">
                                     <div id="patient_list"></div>
 
-
-                                    {{--                                    <select name="patient_id" type="" id="patient_id" class="form-control select2Ajax">--}}
-
-{{--                                    </select>--}}
                                     <div class="text-danger my-1" id="patient_name_error"></div>
+                                </div>
+                                <div class="col-6 fv-row">
+                                    <label for="schedule_id" class="required fs-5 fw-semibold mb-2">Schedule</label>
+                                    <select name="schedule_id" id="schedule_id" class="form-control js-example-basic-single" required>
+                                        <option value=""><-- Select a schedule --></option>
+                                    </select>
                                 </div>
 
                             </div>
+
                             <div class="row mb-5">
+                                <div class="col-6 fv-row">
+                                    <label for="" class="required fs-5 fw-semibold mb-2">Doctor Department Name</label>
+
+                                    <select name="department_id" id="department_id"  class="js-example-basic-single form-control"  data-placeholder="Select Department">
+
+                                        @foreach($departments as $department)
+                                            <option value="{{ $department->department_name }}" >{{ $department->department_name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="text-danger my-1" id="department_id_error"></div>
+                                </div>
+                                <div class="col-6 fv-row">
+                                <label for="" class="required fs-5 fw-semibold mb-2">Patient Type</label>
+
+                                <select name="patient_type" id="patient_type"  class="js-example-basic-single form-control"  data-placeholder="Select Patient Type">
+
+                                    <option value="">-- Select a patient type --</option>
+                                    <option value="new" {{ old('patient_type') == 'new' ? 'selected' : '' }}>New</option>
+                                    <option value="old" {{ old('patient_type') == 'old' ? 'selected' : '' }}>Old</option>
+                                    <option value="report" {{ old('patient_type') == '"report' ? 'selected' : '' }}>Report</option>
+
+                                </select>
+                                <div class="text-danger my-1" id="patient_type_error"></div>
+                            </div>
+                            </div>
+                            <!-- Begin:: Input group Department Description -->
+                            <div class="row mb-5">
+                                <div class="col-6 fv-row">
+                                    <label for="" class="required fs-5 fw-semibold mb-2">Doctor Name</label>
+
+                                    <select name="doctor_id" id="doctor_id" class="js-example-basic-single form-control" data-placeholder="Select Doctor">
+                                        <option value="doctor_id" class="text-center" selected><--Select A Doctor--></option>
+
+                                    </select>
+
+                                    <div class="text-danger my-1" id="doctor_id_error"></div>
+                                </div>
+                                <div class="col-6 fv-row">
+                                    <label for="" class="required fs-5 fw-semibold mb-2">Appointment Status</label>
+
+                                    <select name="status" id="status"  class="js-example-basic-single form-control"  data-placeholder="Select Appointment Status">
+
+                                        <option value="">--Select--</option>
+                                        <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                                        <option value="confirmed" {{ old('status') == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                                        <option value="waiting" {{ old('status') == 'waiting' ? 'selected' : '' }}>Waiting</option>
+                                        <option value="hold" {{ old('status') == 'hold' ? 'selected' : '' }}>Hold</option>
+                                        <option value="canceled" {{ old('status') == 'canceled' ? 'selected' : '' }}>Canceled</option>
+                                        <option value="seen" {{ old('status') == 'seen' ? 'selected' : '' }}>Seen</option>
+
+                                    </select>
+                                    <div class="text-danger my-1" id="status_error"></div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-5">
+                                <div class="col-6 fv-row">
+                                    <label for="appointment_date" class="required fs-5 fw-semibold mb-2">Appointment Date</label>
+                                    <input type="date" name="appointment_date" id="appointment_date"  class="form-control">
+
+
+                                    <div class="text-danger my-1" id="appointment_date_error"></div>
+                                </div>
 
 
 
                             </div>
-                            <!--begin::Input group Department Description-->
-                            <div class="row mb-5">
 
-                            </div>
-                            <div class="row mb-5">
-
-                            </div>
 
                         </div>
                     </div>
@@ -273,9 +333,8 @@
             })
         }
     </script>
-
+{{--    // Add Client review--}}
     <script>
-        // Add Client review
         $(document).ready(function () {
             $("#add_schedule_form").on("submit", function (e) {
                 e.preventDefault();
@@ -321,13 +380,10 @@
                 });
             });
         });
-
-
-
     </script>
-
+    {{--  deleted All Selected field--}}
     <script>
-        {{--  deleted All Selected field--}}
+
         $(document).ready(function() {
             $('#select-all-checkbox').on('click', function() {
                 $('.checkbox-ids').prop('checked', $(this).prop('checked'));
@@ -387,7 +443,7 @@
         });
     </script>
 
-    {{-- patient id Searching jax   --}}
+    {{-- patient id Searching ajax   --}}
     <script>
         $(document).ready(function () {
             $("#patient_search").on('keyup', function () {
@@ -415,6 +471,159 @@
 
 
     </script>
+    {{-- Department Select Dr field show Doctor   --}}
+    <script>
+        $('#department_id').on('change', function() {
+            var departmentId = $(this).val();
+
+            if (departmentId) {
+                $.ajax({
+                    url: '{{ route('get.doctors') }}',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: { department_id: departmentId },
+                    success: function(data) {
+                        $('#doctor_id').empty();
+
+                        if (data.length > 0) {
+                            $.each(data, function(index, doctor) {
+                                $('#doctor_id').append($('<option>', {
+                                    value: doctor.id,
+                                    text: doctor.dr_name
+                                }));
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: "No doctor available"
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: "No Department Selected"
+                });
+            }
+        });
+
+
+
+
+
+
+    </script>
+    {{-- Schedule date Select Show Schedule date and availabe or not   --}}
+    <script>
+        /*$(document).ready(function() {
+            // Initialize Select2 for the doctor dropdown
+            $('#doctor_id').select2();
+
+            $('#doctor_id, #appointment_date').on('change', function() {
+                var doctorId = $('#doctor_id').val();
+                var appointmentDate = $('#appointment_date').val();
+
+                if (doctorId && appointmentDate) {
+                    $.ajax({
+                        url: '{{ route('get.schedules') }}',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: { doctor_id: doctorId, appointment_date: appointmentDate },
+                        success: function(data) {
+                            $('#schedule_id').empty();
+                            if (data.length > 0) {
+                                $.each(data, function(index, schedule) {
+                                    $('#schedule_id').append($('<option>', {
+                                        value: schedule.id,
+                                        text: schedule.schedule_days + ' (' + schedule.start_time + ' - ' + schedule.end_time + ')'
+                                    }));
+                                });
+                                // Trigger the change event to update Select2 (if you're using it)
+                                $('#schedule_id').trigger('change');
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: "No schedules available"
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                }
+            });
+        });*/
+
+
+        $(document).ready(function() {
+
+            $('#doctor_id').select2();
+
+            $('#doctor_id, #appointment_date').on('change', function() {
+                var doctorId = $('#doctor_id').val();
+                var appointmentDate = $('#appointment_date').val();
+
+                if (doctorId && appointmentDate) {
+                    $.ajax({
+                        url: '{{ route('get.schedules') }}',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: { doctor_id: doctorId, appointment_date: appointmentDate },
+                        success: function(data) {
+                            $('#schedule_id').empty();
+                            if (!data.schedulesEmpty) {
+                                $.each(data.schedules, function(index, schedule) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Match',
+                                        text: 'schedules available'
+                                    });
+                                    $('#schedule_id').append($('<option>', {
+                                        value: schedule.id,
+                                        text: schedule.schedule_days + ' (' + schedule.start_time + ' - ' + schedule.end_time + ')'
+                                    }));
+                                });
+
+                                $('#schedule_id').trigger('change');
+                            } else {
+                                $('#schedule_id').append($('<option>', {
+                                    value: '',
+                                    text: '<-- No schedules available -->'
+                                }));
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'No schedules available'
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                } else {
+                    // Handle the case when doctorId or appointmentDate is not selected
+                    $('#schedule_id').empty().append($('<option>', {
+                        value: '',
+                        text: 'No schedules available'
+                    }));
+
+                    // Remove any previously added error message
+                    $('#schedule_id_error').empty();
+                }
+            });
+        });
+
+    </script>
+
 
 
     <!--begin::Vendors Javascript(used for this page only)-->
@@ -438,9 +647,10 @@
         $(document).ready(function() {
             $('.js-example-basic-single').select2(
                 {
-                    placeholder: 'Select an Doctor name',
+                    // placeholder: 'Select Options ',
                 }
             );
+
 
             $('.js-example-basic-multiple').select2({
                 placeholder: 'Select Days'
