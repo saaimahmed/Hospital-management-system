@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\HMS2;
 
 use App\Http\Controllers\Controller;
+use App\Models\HMS2\Appointment;
 use App\Models\HMS2\Department;
 use App\Models\HMS2\Doctor;
 use App\Models\HMS2\Patient;
@@ -16,6 +17,34 @@ class AppointmentController extends Controller
             'departments' => Department::where('status', 1)->where('department_type', 'doctor')->get(['id', 'department_name']),
             'doctors' => Doctor::latest()->get(['id','dr_id','dr_name', 'dr_designation', 'dr_department',]),
         ]);
+    }
+
+    public function store(Request $request){
+        $request->validate([
+            'patient_id' => ['required'],
+            'department_id' => ['required'],
+            'doctor_id' => ['required'],
+            'appointment_date' => ['required'],
+            'schedule_id' => ['required'],
+            'patient_type' => ['required'],
+            'status' => ['required'],
+        ]);
+
+
+        $appointment                            = new Appointment();
+        $appointment->patient_id                = $request->patient_id;
+        $appointment->department_id              = $request->department_id;
+        $appointment->doctor_id            = $request->doctor_id;
+        $appointment->appointment_date            = $request->appointment_date;
+        $appointment->schedule_id             = $request->schedule_id;
+        $appointment->patient_type       = $request->patient_type;
+        $appointment->status               = $request->status;
+
+        $appointment->save();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Appointment added successfully.'
+        ], 200);
     }
 
     public function getPatients(Request $request)
@@ -52,24 +81,7 @@ class AppointmentController extends Controller
     }
 
 
-//    public function getSchedules(Request $request)
-//    {
-//        $doctorId = $request->doctor_id;
-//        $appointmentDate = $request->appointment_date;
-//        $appointmentDayOfWeek = date('l', strtotime($appointmentDate));
-//
-//
-//        $schedules = Schedule::where('doctor_id', $doctorId)
-//            ->where('schedule_days', $appointmentDayOfWeek)
-//            ->where('status', 1)
-//            ->get();
-//
-//        if ($schedules->isEmpty()) {
-//            return response()->json(['error' => 'No schedules available for this doctor on this day'], 404);
-//        }
-//
-//        return response()->json($schedules);
-//    }
+
 
 
     public function getSchedules(Request $request)

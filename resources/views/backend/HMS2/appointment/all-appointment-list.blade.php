@@ -181,7 +181,7 @@
     <div class="modal fade" id="kt_modal_new_address" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-top mw-1000px">
             <div class="modal-content">
-                <form class="form" method="post" action=""  id="add_schedule_form" enctype="multipart/form-data">
+                <form class="form" method="post" action="{{ route('appointments.store') }}"  id="add_appointment_form" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header" id="kt_modal_new_address_header">
                         <h3 class="text-center mx-auto">Add New Appointment</h3>
@@ -212,7 +212,7 @@
                                 </div>
                                 <div class="col-6 fv-row">
                                     <label for="schedule_id" class="required fs-5 fw-semibold mb-2">Schedule</label>
-                                    <select name="schedule_id" id="schedule_id" class="form-control js-example-basic-single" required>
+                                    <select name="schedule_id" id="schedule_id" class="form-control js-example-basic-single" >
                                         <option value=""><-- Select a schedule --></option>
                                     </select>
                                 </div>
@@ -224,9 +224,9 @@
                                     <label for="" class="required fs-5 fw-semibold mb-2">Doctor Department Name</label>
 
                                     <select name="department_id" id="department_id"  class="js-example-basic-single form-control"  data-placeholder="Select Department">
-
+                                        <option value=""></option>
                                         @foreach($departments as $department)
-                                            <option value="{{ $department->department_name }}" >{{ $department->department_name }}</option>
+                                            <option value="{{ $department->id }}" >{{ $department->department_name }}</option>
                                         @endforeach
                                     </select>
                                     <div class="text-danger my-1" id="department_id_error"></div>
@@ -251,7 +251,7 @@
                                     <label for="" class="required fs-5 fw-semibold mb-2">Doctor Name</label>
 
                                     <select name="doctor_id" id="doctor_id" class="js-example-basic-single form-control" data-placeholder="Select Doctor">
-                                        <option value="doctor_id" class="text-center" selected><--Select A Doctor--></option>
+                                        <option value="doctor_id" class="text-center" ><--Select A Doctor--></option>
 
                                     </select>
 
@@ -336,7 +336,7 @@
 {{--    // Add Client review--}}
     <script>
         $(document).ready(function () {
-            $("#add_schedule_form").on("submit", function (e) {
+            $("#add_appointment_form").on("submit", function (e) {
                 e.preventDefault();
 
                 $(".text-danger").text('');
@@ -361,7 +361,7 @@
                             }).then(function (result) {
                                 if (result.isConfirmed) {
                                     // Redirect to the index page
-                                    window.location.href = '{{ route('schedules.index') }}';
+                                    window.location.href = '{{ route('appointments.index') }}';
                                 }
                             });
                         }

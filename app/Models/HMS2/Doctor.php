@@ -18,6 +18,11 @@ class Doctor extends Model
 
     ];
 
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'dr_department');
+    }
+
     public function schedule(){
         $this->hasMany(Schedule::class);
     }

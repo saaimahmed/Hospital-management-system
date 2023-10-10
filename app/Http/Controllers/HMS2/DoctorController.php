@@ -39,7 +39,7 @@ class DoctorController extends Controller
 //          $doctor->dr_id                  = "HMS-DR".DB::table('doctors')->latest()->value('id')+1;
 
           $doctor->dr_name                = $request->dr_name;
-          $doctor->dr_department          = $request->dr_department;
+          $doctor->dr_department       = $request->dr_department;
           $doctor->dr_designation         = $request->dr_designation;
           $doctor->dr_phone               = $request->dr_phone;
           $doctor->dr_email               = $request->dr_email;

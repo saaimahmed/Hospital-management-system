@@ -115,7 +115,7 @@
                                 <td><img src="{{ $doctor->image ? asset( $doctor->image  ) : asset('assets/media/avatars/avater.jpg') }}" alt="" style="width: 60px; height: 60px;" class="image-thumbnail rounded-circle object-fit-cover"></td>
                                 <td>{{ $doctor->dr_name }}</td>
                                 <td>{{ $doctor->dr_designation }}</td>
-                                <td>{{ $doctor->dr_department }}</td>
+                                <td>{{ $doctor->department->department_name }}</td>
                                 <td>{{ $doctor->dr_phone }}</td>
                                 <td>
                                     <a href="{{ route('doctors.status', encrypt($doctor->id)) }}" id="status-change">
@@ -203,10 +203,10 @@
                                 <div class="col-6 fv-row">
                                     <label for="" class="required fs-5 fw-semibold mb-2">Doctor Department</label>
 
-                                    <select name="" id="" class="js-example-basic-single form-control">
+                                    <select name="dr_department" id="" class="js-example-basic-single form-control">
                                         <option value="" selected> </option>
                                         @foreach($departments as $department)
-                                        <option value="{{ $department->department_name }}">{{ $department->department_name }}</option>
+                                        <option value="{{ $department->id }}">{{ $department->department_name }}</option>
                                         @endforeach
                                     </select>
                                     <div class="text-danger my-1" id="dr_department_error"></div>
