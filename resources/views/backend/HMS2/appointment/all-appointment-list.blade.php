@@ -37,12 +37,15 @@
         </div>
     </div>
 
+
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content  flex-column-fluid ">
         <div id="kt_app_content_container" class="app-container  container-xxl ">
 
             <div class="card card-flush">
-
+                <div class="card-body py-5">
+                    <h1>Quick Appointment</h1>
+                </div>
                 <div class="pt-5 mx-10">
                     <ul class="nav-item d-flex gap-8 justify-content-end align-items-center">
                         <li class="nav-link">
@@ -78,6 +81,7 @@
                     </div>
                 </div>
 
+
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_category_table">
@@ -89,79 +93,85 @@
                                     <label class="form-check-label" for="select-all-checkbox"></label>
                                 </div>
                             </th>
-                            <th class="min-w-50px ps-5">Schedule id</th>
-                            <th class="min-w-100px ps-5">Doctor Name</th>
-                            <th class="min-w-100px">Fees</th>
-                            <th class="min-w-100px">Days</th>
-                            <th class="min-w-50px">Visiting hour</th>
+                            <th class="min-w-100px ps-5">Appointment id</th>
+                            <th class="min-w-100px ps-5">Patient Name</th>
+                            <th class="min-w-100px ps-5">Department Name</th>
+                            <th class="min-w-100px">Doctor name</th>
+                            <th class="min-w-100px">Appointment date</th>
+                            <th class="min-w-100px">Schedule Id</th>
+                            <th class="min-w-50px">Patient Type</th>
                             <th class="min-w-50px">Status</th>
-                            <th class="text-end min-w-70px pe-5">Actions</th>
+                            <th class="text-end min-w-50px pe-5">Actions</th>
                         </tr>
                         </thead>
-{{--                        <tbody class="fw-semibold text-gray-600">--}}
+                        <tbody class="fw-semibold text-gray-600">
 
-{{--                        @foreach($schedules as $schedule)--}}
-{{--                            <tr id="schedule_ids{{ $schedule->id }}">--}}
-{{--                                <td>--}}
-{{--                                    <div class="form-check form-check-sm form-check-custom form-check-solid ">--}}
-{{--                                        <input class="form-check-input" name="ids" class="checkbox-ids" type="checkbox" value="{{ $schedule->id }}"/>--}}
-{{--                                    </div>--}}
-{{--                                </td>--}}
-{{--                                <td>{{ $schedule->id}}</td>--}}
+                        @foreach($appointments as $appointment)
+                            <tr id="appointments_ids{{ $appointment->id }}">
+                                <td>
+                                    <div class="form-check form-check-sm form-check-custom form-check-solid ">
+                                        <input class="form-check-input" name="ids" class="checkbox-ids" type="checkbox" value="{{ $appointment->id }}"/>
+                                    </div>
+                                </td>
+                                <td>{{ $appointment->id}}</td>
 
-{{--                                @if ($schedule->doctor)--}}
-{{--                                    <td>{{ $schedule->doctor->dr_name }}</td>--}}
-{{--                                @else--}}
-{{--                                    <td>Null</td>--}}
-{{--                                @endif--}}
+                                    <td>{{ $appointment->patient_id }}</td>
 
-{{--                                <td><strong>New Patient: </strong><span class="text-success">{{ $schedule->new_patient_fee }} Tk</span><br>--}}
-{{--                                    <strong>Old Patient: </strong><span class="text-info">{{ $schedule->old_patient_fee }} Tk</span><br>--}}
-{{--                                    <strong>Report: </strong><span class="text-warning">{{ $schedule->report_fee }} Tk</span></strong><br>--}}
-{{--                                </td>--}}
-{{--                                <td>{{ $schedule->schedule_days  }}</td>--}}
+                                @if ($appointment->department)
+                                    <td>{{ $appointment->department->department_name }}</td>
+                                @else
+                                    <td>Null</td>
+                                @endif
 
-{{--                                <td>--}}
+                                <td>{{ optional($appointment->doctor)->dr_name }}</td>
 
-{{--                                    <strong>Start Time: </strong><span class="text-success">{{ \Carbon\Carbon::parse( $schedule->start_time )->format('h:i A')}}</span><br>--}}
-{{--                                    <strong>Start Time: </strong><span class="text-danger">{{ \Carbon\Carbon::parse( $schedule->end_time )->format('h:i A')}}</span><br>--}}
-{{--                                </td>--}}
-{{--                                <td>--}}
-{{--                                    <a href="{{ route('schedules.status', encrypt($schedule->id)) }}" id="status-change">--}}
-{{--                                        <div class="badge {{ $schedule->status === 1 ? 'badge-light-success' : 'badge-light-danger' }}">{{  $schedule->status === 1 ? 'Active' : 'Deactivated'}}</div>--}}
-{{--                                    </a>--}}
-{{--                                </td>--}}
-{{--                                <td class="text-end">--}}
-{{--                                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary btn-flex btn-center"--}}
-{{--                                       data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">--}}
-{{--                                        Actions--}}
-{{--                                        <i class="ki-duotone ki-down fs-5 ms-1"></i>--}}
-{{--                                    </a>--}}
-{{--                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">--}}
-{{--                                        <div  class="menu-item px-3 mb-1">--}}
-{{--                                            <a href="{{ route('schedules.edit',encrypt($schedule->id)) }}" class="menu-link px-3 bg-light-primary text-primary ">--}}
+                                <td>{{ $appointment->appointment_date  }}</td>
 
-{{--                                                <i class="fa fa-edit me-2 text-primary"></i>Edit--}}
-{{--                                            </a>--}}
-{{--                                        </div>--}}
+                                @if ($appointment->schedule)
+                                    <td>{{ $appointment->schedule->schedule_days }} <br>
 
-{{--                                        <div class="menu-item px-3">--}}
-{{--                                            <a href="#" class="menu-link px-3 bg-light-warning text-warning">--}}
-{{--                                                <i class="fa fa-eye text-info me-2"></i>View--}}
-{{--                                            </a>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="menu-item px-3">--}}
-{{--                                            <a href="#" onclick="deleteItem({{ $schedule->id }})" class="menu-link px-3 bg-light-danger text-danger">--}}
-{{--                                                <i class="fa fa-trash text-danger me-2"></i>Delete--}}
-{{--                                            </a>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
+                                        <strong>Start Time: </strong><span class="text-success">{{ \Carbon\Carbon::parse($appointment->schedule->start_time )->format('h:i A')}}</span><br>
+                                        <strong>End Time: </strong><span class="text-danger">{{ \Carbon\Carbon::parse( $appointment->schedule->end_time )->format('h:i A')}}</span><br>
+                                    </td>
+                                @else
+                                    <td>Null</td>
+                                @endif
 
-{{--                        @endforeach--}}
+                                <td>{{ $appointment->patient_type }}</td>
+                                <td>{{ $appointment->status }}</td>
 
-{{--                        </tbody>--}}
+
+                                <td class="text-end">
+                                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary btn-flex btn-center"
+                                       data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                        Actions
+                                        <i class="ki-duotone ki-down fs-5 ms-1"></i>
+                                    </a>
+                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+                                        <div  class="menu-item px-3 mb-1">
+                                            <a href="{{ route('appointments.edit', encrypt($appointment->id)) }}" class="menu-link px-3 bg-light-primary text-primary ">
+
+                                                <i class="fa fa-edit me-2 text-primary"></i>Edit
+                                            </a>
+                                        </div>
+
+                                        <div class="menu-item px-3">
+                                            <a href="#" class="menu-link px-3 bg-light-warning text-warning">
+                                                <i class="fa fa-eye text-info me-2"></i>View
+                                            </a>
+                                        </div>
+                                        <div class="menu-item px-3">
+                                            <a href="#" onclick="deleteItem({{ $appointment->id }})" class="menu-link px-3 bg-light-danger text-danger">
+                                                <i class="fa fa-trash text-danger me-2"></i>Delete
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        @endforeach
+
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -278,7 +288,7 @@
                             <div class="row mb-5">
                                 <div class="col-6 fv-row">
                                     <label for="appointment_date" class="required fs-5 fw-semibold mb-2">Appointment Date</label>
-                                    <input type="date" name="appointment_date" id="appointment_date"  class="form-control">
+                                    <input type="date" name="appointment_date" id="appointment_date"   class="form-control">
 
 
                                     <div class="text-danger my-1" id="appointment_date_error"></div>
@@ -410,7 +420,7 @@
                     if (result.isConfirmed) {
                         // User clicked "Yes, delete it!" in the confirmation dialog
                         $.ajax({
-                            url: "{{ route('schedules.all-Delete') }}",
+                            url: "",
                             type: "DELETE",
                             data: {
                                 ids: all_ids,
@@ -418,7 +428,7 @@
                             },
                             success: function (response) {
                                 $.each(all_ids, function (key, val) {
-                                    $('#schedule_ids' + val).remove();
+                                    $('#appointments_ids' + val).remove();
                                 });
                             }
                         });
@@ -521,47 +531,6 @@
     </script>
     {{-- Schedule date Select Show Schedule date and availabe or not   --}}
     <script>
-        /*$(document).ready(function() {
-            // Initialize Select2 for the doctor dropdown
-            $('#doctor_id').select2();
-
-            $('#doctor_id, #appointment_date').on('change', function() {
-                var doctorId = $('#doctor_id').val();
-                var appointmentDate = $('#appointment_date').val();
-
-                if (doctorId && appointmentDate) {
-                    $.ajax({
-                        url: '{{ route('get.schedules') }}',
-                        type: 'GET',
-                        dataType: 'json',
-                        data: { doctor_id: doctorId, appointment_date: appointmentDate },
-                        success: function(data) {
-                            $('#schedule_id').empty();
-                            if (data.length > 0) {
-                                $.each(data, function(index, schedule) {
-                                    $('#schedule_id').append($('<option>', {
-                                        value: schedule.id,
-                                        text: schedule.schedule_days + ' (' + schedule.start_time + ' - ' + schedule.end_time + ')'
-                                    }));
-                                });
-                                // Trigger the change event to update Select2 (if you're using it)
-                                $('#schedule_id').trigger('change');
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Error',
-                                    text: "No schedules available"
-                                });
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(xhr.responseText);
-                        }
-                    });
-                }
-            });
-        });*/
-
 
         $(document).ready(function() {
 

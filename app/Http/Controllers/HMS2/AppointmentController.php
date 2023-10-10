@@ -14,8 +14,12 @@ class AppointmentController extends Controller
 {
     public function index(){
         return view('backend.HMS2.appointment.all-appointment-list',[
+            'doctors' => Doctor::orderBy('id', 'DESC')->get(),
             'departments' => Department::where('status', 1)->where('department_type', 'doctor')->get(['id', 'department_name']),
-            'doctors' => Doctor::latest()->get(['id','dr_id','dr_name', 'dr_designation', 'dr_department',]),
+//            'doctors' => Doctor::latest()->get(['id','dr_id','dr_name', 'dr_designation', 'dr_department',]),
+
+            'appointments' => Appointment::orderBy('id', 'DESC')->get()
+
         ]);
     }
 
@@ -46,6 +50,45 @@ class AppointmentController extends Controller
             'message' => 'Appointment added successfully.'
         ], 200);
     }
+
+
+
+    public function edit($id){
+        return view('backend.HMS2.appointment.edit-appointment',[
+            'departments' => Department::where('status', 1)->where('department_type', 'doctor')->get(['id', 'department_name']),
+            'appointment' => Appointment::find(decrypt($id)),
+        ]);
+    }
+    public function update(Request $request, $id){
+
+        $request->validate([
+            'appointment_date' => ['required'],
+            'schedule_id' => ['required'],
+            'patient_type' => ['required'],
+            'status' => ['required'],
+        ]);
+        $appointment = Appointment::find(decrypt($id));
+        $appointment->appointment_date            = $request->appointment_date;
+        $appointment->schedule_id             = $request->schedule_id;
+        $appointment->patient_type       = $request->patient_type;
+        $appointment->status               = $request->status;
+
+        $appointment->save();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Appointment Update successfully.'
+        ], 200);
+
+    }
+
+    public function destroy($id){
+
+        $appointment = Appointment::find($id);
+        $appointment->delete();
+        return redirect()->back()->with('success', 'Appointment delete successfully.');
+    }
+
+
 
     public function getPatients(Request $request)
     {
@@ -99,6 +142,9 @@ class AppointmentController extends Controller
 
         return response()->json(['schedules' => $schedules, 'schedulesEmpty' => $schedulesEmpty]);
     }
+
+
+
 
 
 }
