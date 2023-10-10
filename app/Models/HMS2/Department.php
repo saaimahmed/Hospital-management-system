@@ -33,4 +33,10 @@ class Department extends Model
 
     }
 
+
+    public function doctors()
+    {
+        return $this->hasMany(Doctor::class, 'dr_department');
+    }
+
 }

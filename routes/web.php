@@ -85,7 +85,11 @@ Route::controller(ScheduleController::class)->prefix('schedules')->group(functio
 //Appointment Controller
 Route::controller(AppointmentController::class)->prefix('appointments')->group(function (){
     Route::get('/index','index')->name('appointments.index');
+    Route::post('/store','store')->name('appointments.store');
     Route::get('/get-patients','getPatients')->name('get.patients');
+    Route::get('/get-doctor-name-list','getDoctorName')->name('get.doctors');
+    Route::get('/get-department-name-list','getDepartmentName')->name('get.departments');
+    Route::get('/get-schedules','getSchedules')->name('get.schedules');
 });
 
 
