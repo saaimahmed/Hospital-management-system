@@ -88,6 +88,7 @@ Route::controller(AppointmentController::class)->prefix('appointments')->group(f
     Route::post('/store','store')->name('appointments.store');
     Route::get('/edit/{id}','edit')->name('appointments.edit');
     Route::PUT('/update/{id}','update')->name('appointments.update');
+    Route::post('/status/{id}','status')->name('appointments.status');
     Route::delete('/destroy/{id}','destroy')->name('appointments.destroy');
 
 

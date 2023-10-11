@@ -16,7 +16,7 @@ class AppointmentController extends Controller
         return view('backend.HMS2.appointment.all-appointment-list',[
             'doctors' => Doctor::orderBy('id', 'DESC')->get(),
             'departments' => Department::where('status', 1)->where('department_type', 'doctor')->get(['id', 'department_name']),
-//            'doctors' => Doctor::latest()->get(['id','dr_id','dr_name', 'dr_designation', 'dr_department',]),
+
 
             'appointments' => Appointment::orderBy('id', 'DESC')->get()
 
@@ -81,6 +81,20 @@ class AppointmentController extends Controller
 
     }
 
+
+    public function status(Request $request, $id){
+        $request->validate([
+            'status' => ['required'],
+        ]);
+
+        $appointment = Appointment::find(decrypt($id));
+        $appointment->status = $request->status;
+        $appointment->save();
+
+        return redirect()->route('appointments.index')->with('success', 'Appointment Status Update successfully.');
+
+    }
+
     public function destroy($id){
 
         $appointment = Appointment::find($id);
@@ -94,9 +108,13 @@ class AppointmentController extends Controller
     {
         if ($request->ajax()) {
             $searchTerm = $request->input('search');
-            $data = Patient::where('patient_name', 'LIKE', '%' . $searchTerm . '%')
-                ->orWhere('patient_id', 'LIKE', '%' . $searchTerm . '%')
+//            $data = Patient::where('patient_name', 'LIKE', '%' . $searchTerm . '%')
+//                ->orWhere('patient_id', 'LIKE', '%' . $searchTerm . '%')
+//                ->get();
+
+            $data = Patient::whereRaw("SUBSTRING(patient_name, 1, 3) = ? OR patient_id LIKE ?", [substr($searchTerm, 0, 3), '%' . $searchTerm . '%'])
                 ->get();
+
 
             $output = '';
             if (count($data) > 0) {

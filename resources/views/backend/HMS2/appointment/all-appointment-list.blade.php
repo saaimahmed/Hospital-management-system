@@ -70,7 +70,7 @@
                             </i>
                             <input type="text" data-kt-ecommerce-category-filter="search"
                                    class="form-control form-control-solid w-250px ps-12"
-                                   placeholder="Search Schedule"/>
+                                   placeholder="Search Appointment"/>
                         </div>
                     </div>
                     <div class="card-toolbar">
@@ -95,7 +95,7 @@
                             </th>
                             <th class="min-w-100px ps-5">Appointment id</th>
                             <th class="min-w-100px ps-5">Patient Name</th>
-                            <th class="min-w-100px ps-5">Department Name</th>
+{{--                            <th class="min-w-100px ps-5">Department Name</th>--}}
                             <th class="min-w-100px">Doctor name</th>
                             <th class="min-w-100px">Appointment date</th>
                             <th class="min-w-100px">Schedule Id</th>
@@ -118,12 +118,18 @@
                                     <td>{{ $appointment->patient_id }}</td>
 
                                 @if ($appointment->department)
-                                    <td>{{ $appointment->department->department_name }}</td>
+                                    <td>
+                                        {{ optional($appointment->doctor)->dr_name }}<br>
+
+                                        {{ $appointment->department->department_name }}
+
+
+                                    </td>
                                 @else
                                     <td>Null</td>
                                 @endif
 
-                                <td>{{ optional($appointment->doctor)->dr_name }}</td>
+{{--                                <td>{{ optional($appointment->doctor)->dr_name }}</td>--}}
 
                                 <td>{{ $appointment->appointment_date  }}</td>
 
@@ -138,7 +144,80 @@
                                 @endif
 
                                 <td>{{ $appointment->patient_type }}</td>
-                                <td>{{ $appointment->status }}</td>
+
+                                <td class="text-center">
+
+                                    <a class="btn btn-sm btn-{{ $appointment->status == 'pending' ? 'info' :
+                                          ($appointment->status == 'confirmed' ? 'success' :
+                                          ($appointment->status == 'waiting' ? 'warning' :
+                                          ($appointment->status == 'hold' ? 'secondary' :
+                                          ($appointment->status == 'canceled' ? 'danger' :
+                                          ($appointment->status == 'seen' ?  'primary' : ''))))) }}"
+                                       id="add_status_btn"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#kt_modal_{{ $appointment->id }}">
+                                        {{ $appointment->status }}
+                                    </a>
+
+                                    <div class="modal fade" id="kt_modal_{{ $appointment->id }}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-top mw-600px">
+                                            <div class="modal-content">
+                                                <form class="form" method="post" action="{{ route('appointments.status', encrypt($appointment->id)) }}"  id="add_status_form" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div class="modal-header" id="kt_modal_new_address_header">
+                                                        <h3 class="text-center mx-auto">Change Appointment Status</h3>
+                                                        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                                            <i class="ki-duotone ki-cross fs-1">
+                                                                <span class="path1"></span><span class="path2"></span>
+                                                            </i>
+                                                        </div>
+                                                    </div>
+                                                    <!--begin::Modal body-->
+                                                    <div class="modal-body py-10 px-lg-17">
+                                                        <!--begin::Scroll-->
+                                                        <div
+                                                            class="scroll-y me-n7 pe-7" id="kt_modal_new_address_scroll"
+                                                            data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
+                                                            data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_address_header"
+                                                            data-kt-scroll-wrappers="#kt_modal_new_address_scroll" data-kt-scroll-offset="300px">
+
+                                                            <!--begin::Input group Department Name-->
+                                                            <div class="row mb-5">
+                                                                <div class="col-12 fv-row">
+                                                                    <label for="" class="required fs-5 fw-semibold mb-2"> {{ $appointment->status }} Appointment Status</label>
+
+                                                                    <select name="status" id="status"  class="js-example-basic-single form-control"  data-placeholder="Select Appointment Status">
+
+                                                                        <option value="pending" {{ old('status') ??  $appointment->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                                                        <option value="confirmed" {{ old('status') ?? $appointment->status == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                                                                        <option value="waiting" {{ old('status') ?? $appointment->status == 'waiting' ? 'selected' : '' }}>Waiting</option>
+                                                                        <option value="hold" {{ old('status')  ?? $appointment->status == 'hold' ? 'selected' : '' }}>Hold</option>
+                                                                        <option value="canceled" {{ old('status') ?? $appointment->status == 'canceled' ? 'selected' : '' }}>Canceled</option>
+                                                                        <option value="seen" {{ old('status') ?? $appointment->status == 'seen' ? 'selected' : '' }}>Seen</option>
+
+                                                                    </select>
+                                                                    <div class="text-danger my-1" id="status_error"></div>
+                                                                 </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+
+                                                    <!--begin::Modal footer-->
+                                                    <div class="modal-footer flex-center">
+                                                        <button type="submit" id="submitBtn" class="btn btn-primary d-flex justify-content-center align-content-center">
+                                                            <span class="indicator-label">Submit</span>
+                                                            <span class="indicator-progress">
+                               <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
 
 
                                 <td class="text-end">
@@ -343,7 +422,7 @@
             })
         }
     </script>
-{{--    // Add Client review--}}
+{{--    // Add Appointment review--}}
     <script>
         $(document).ready(function () {
             $("#add_appointment_form").on("submit", function (e) {
@@ -390,6 +469,59 @@
                 });
             });
         });
+    </script>
+    {{-- Appointment Status Update--}}
+    <script>
+        $(document).ready(function () {
+            $("#add_status_form").on("submit", function (e) {
+                e.preventDefault();
+
+                $(".text-danger").text('');
+                const formData = new FormData($(this)[0]);
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: "POST",
+                    data: formData,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+
+                    success: function (response) {
+
+                        $("#submitBtn .indicator-label").text("Adding...");
+                        $("#submitBtn .indicator-progress").show();
+                        if (response.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: response.message,
+                            }).then(function (result) {
+                                if (result.isConfirmed) {
+                                    // Redirect to the index page
+                                    window.location.href = '{{ route('appointments.index') }}';
+                                }
+                            });
+                        }
+
+                    },
+                    error: function (error) {
+                        if (error.status === 422) {
+                            var errors = error.responseJSON.errors;
+                            for (var field in errors) {
+                                $("#" + field + "_error").text(errors[field][0]);
+                            }
+                        } else {
+                            console.error(error);
+                        }
+                    },
+                });
+            });
+        });
+
+
+
+
+
     </script>
     {{--  deleted All Selected field--}}
     <script>
@@ -616,7 +748,7 @@
         $(document).ready(function() {
             $('.js-example-basic-single').select2(
                 {
-                    // placeholder: 'Select Options ',
+                    placeholder: 'Select Options ',
                 }
             );
 
